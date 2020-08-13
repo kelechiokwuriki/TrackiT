@@ -7,6 +7,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Name</th>
+                            <th scope="col">Type</th>
                             <th scope="col">Weight</th>
                             <th scope="col">Sets</th>
                             <th scope="col">Reps</th>
@@ -16,12 +17,16 @@
                         <tr v-for="(exercise, index) in session.exercises" v-bind:key="index">
                             <th scope="row">{{ index + 1 }}</th>
                             <td>{{ exercise.name }}</td>
+                            <td>{{ exercise.type }}</td>
                             <td>{{ exercise.weight_number }} {{exercise.weight_type}}</td>
                             <td>{{ exercise.sets }}</td>
                             <td>{{ exercise.reps }}</td>
                         </tr>
                     </tbody>
                 </table>
+                <div class="text-center">
+                    <button class="btn btn-success" v-show="session.exercises.length > 0">Submit Session</button>
+                </div>
             </div>
             <div class="col">
                 <div class="card">
@@ -32,7 +37,7 @@
                             </div>
                             <div>
                                 <button class="btn btn-secondary" @click="previousStep" v-show="step === totalSteps">Go Back</button>
-                                <button class="btn btn-success" @click="nextStep" v-show="step !== totalSteps">Add Exercises</button>
+                                <button class="btn btn-success" @click="nextStep" v-show="step !== totalSteps" :disabled="session.name === ''">Add Exercises</button>
                             </div>
 
                         </div>
@@ -55,13 +60,25 @@
                         <!--Add Exercises-->
                         <template v-if="step === totalSteps">
                             <form>
-                                <!--exercise name-->
-                                <div class="form-group">
-                                    <label for="exercise-name">Exercise Name</label>
-                                    <input type="text" v-model="exercise.name" class="form-control" id="exercise-name" aria-describedby="session-name-help"
-                                    placeholder="E.g. Bench press">
+                                <div class="row">
+                                    <div class="col">
+                                        <!--exercise name-->
+                                        <div class="form-group">
+                                            <label for="exercise-name">Exercise Name</label>
+                                            <input type="text" v-model="exercise.name" class="form-control" id="exercise-name" aria-describedby="session-name-help"
+                                            placeholder="E.g. Bench press">
+                                        </div>
+                                        <!--end exercise name-->
+                                    </div>
+                                    <div class="col">
+                                        <!--exercise type-->
+                                        <div class="form-group">
+                                            <label for="exercise-type">Exercise Type</label>
+                                            <input type="text" v-model="exercise.type" class="form-control" id="exercise-type" aria-describedby="session-name-help"
+                                            placeholder="E.g. Warm up">
+                                        </div>
+                                    </div>
                                 </div>
-                                <!--end exercise name-->
 
                                 <div class="row">
                                     <div class="col">
@@ -124,6 +141,7 @@ export default {
             },
             exercise: {
                 name: '',
+                type: '',
                 weight_number: null,
                 weight_type: 'kg',
                 sets: null,
@@ -140,6 +158,7 @@ export default {
         },
         clearExerciseForm() {
             this.exercise.name = '';
+            this.exercise.type = '';
             this.exercise.weight_number = null;
             this.exercise.weight_type = 'kg';
             this.exercise.sets = null;
@@ -150,6 +169,7 @@ export default {
 
             let exercise = {
                 name: this.exercise.name,
+                type: this.exercise.type,
                 weight_number: this.exercise.weight_number,
                 weight_type: this.exercise.weight_type,
                 sets: this.exercise.sets,

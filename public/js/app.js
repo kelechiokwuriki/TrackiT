@@ -2599,6 +2599,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2611,6 +2628,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       exercise: {
         name: '',
+        type: '',
         weight_number: null,
         weight_type: 'kg',
         sets: null,
@@ -2627,6 +2645,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     clearExerciseForm: function clearExerciseForm() {
       this.exercise.name = '';
+      this.exercise.type = '';
       this.exercise.weight_number = null;
       this.exercise.weight_type = 'kg';
       this.exercise.sets = null;
@@ -2636,6 +2655,7 @@ __webpack_require__.r(__webpack_exports__);
       e.preventDefault();
       var exercise = {
         name: this.exercise.name,
+        type: this.exercise.type,
         weight_number: this.exercise.weight_number,
         weight_type: this.exercise.weight_type,
         sets: this.exercise.sets,
@@ -58184,6 +58204,8 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(exercise.name))]),
                 _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(exercise.type))]),
+                _vm._v(" "),
                 _c("td", [
                   _vm._v(
                     _vm._s(exercise.weight_number) +
@@ -58198,6 +58220,24 @@ var render = function() {
               ])
             }),
             0
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "text-center" }, [
+          _c(
+            "button",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.session.exercises.length > 0,
+                  expression: "session.exercises.length > 0"
+                }
+              ],
+              staticClass: "btn btn-success"
+            },
+            [_vm._v("Submit Session")]
           )
         ])
       ]),
@@ -58242,6 +58282,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "btn btn-success",
+                    attrs: { disabled: _vm.session.name === "" },
                     on: { click: _vm.nextStep }
                   },
                   [_vm._v("Add Exercises")]
@@ -58297,41 +58338,84 @@ var render = function() {
               _vm.step === _vm.totalSteps
                 ? [
                     _c("form", [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "exercise-name" } }, [
-                          _vm._v("Exercise Name")
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col" }, [
+                          _c("div", { staticClass: "form-group" }, [
+                            _c("label", { attrs: { for: "exercise-name" } }, [
+                              _vm._v("Exercise Name")
+                            ]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.exercise.name,
+                                  expression: "exercise.name"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                id: "exercise-name",
+                                "aria-describedby": "session-name-help",
+                                placeholder: "E.g. Bench press"
+                              },
+                              domProps: { value: _vm.exercise.name },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.exercise,
+                                    "name",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
                         ]),
                         _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.exercise.name,
-                              expression: "exercise.name"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            id: "exercise-name",
-                            "aria-describedby": "session-name-help",
-                            placeholder: "E.g. Bench press"
-                          },
-                          domProps: { value: _vm.exercise.name },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
+                        _c("div", { staticClass: "col" }, [
+                          _c("div", { staticClass: "form-group" }, [
+                            _c("label", { attrs: { for: "exercise-type" } }, [
+                              _vm._v("Exercise Type")
+                            ]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.exercise.type,
+                                  expression: "exercise.type"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                id: "exercise-type",
+                                "aria-describedby": "session-name-help",
+                                placeholder: "E.g. Warm up"
+                              },
+                              domProps: { value: _vm.exercise.type },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.exercise,
+                                    "type",
+                                    $event.target.value
+                                  )
+                                }
                               }
-                              _vm.$set(
-                                _vm.exercise,
-                                "name",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
+                            })
+                          ])
+                        ])
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "row" }, [
@@ -58473,6 +58557,8 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Type")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Weight")]),
         _vm._v(" "),
