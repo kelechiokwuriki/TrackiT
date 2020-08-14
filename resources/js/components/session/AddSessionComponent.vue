@@ -152,7 +152,16 @@ export default {
     methods: {
         submitSession() {
             axios.post('/api/session', this.session).then(response => {
-                console.log(response);
+                if(response.status === 200) {
+
+                    let statusMessage = {
+                        statusColor: 'alert-success',
+                        status: 'success',
+                        message: 'Session created successfully!'
+                    };
+
+                    window.eventBus.$emit('status', statusMessage);
+                }
             })
 
         },

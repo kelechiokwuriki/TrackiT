@@ -46,7 +46,9 @@ class SessionApiController extends Controller
     {
         try {
             $request->request->set('user_id', auth()->id());
+
             return $this->sessionService->createSession($request->all());
+
         } catch(Exception $e) {
             Log::debug('Error creating session, reason: ' . $e->getMessage());
         }

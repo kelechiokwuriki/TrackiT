@@ -12,9 +12,15 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('add-session-component', require('./components/session/AddSessionComponent.vue').default);
 
 
+//modules
+Vue.component('status-component', require('./components/modules/StatusComponent.vue').default);
+
+
 //plugins
 Vue.component('number-input', VueNumberInput);
 Vue.component('v-select', vSelect);
+
+window.eventBus = new Vue({});
 
 
 

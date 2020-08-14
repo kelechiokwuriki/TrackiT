@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    {{-- <example-component></example-component> --}}
+    <status-component></status-component>
     <add-session-component></add-session-component>
 @endsection
