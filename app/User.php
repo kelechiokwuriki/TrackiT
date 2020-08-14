@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Session;
 use App\Exercise;
+use Illuminate\Support\Str;
+
 
 class User extends Authenticatable
 {
@@ -47,5 +49,16 @@ class User extends Authenticatable
     public function exercises()
     {
         return $this->hasMany(Exercise::class);
+    }
+
+    public function getApiTokenAttribute($value)
+    {
+        if(!$value) {
+            $value = Str::random(80);
+            $this->api_token = $value;
+            $this->save();
+        }
+
+        return $value;
     }
 }

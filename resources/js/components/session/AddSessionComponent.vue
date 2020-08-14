@@ -25,7 +25,7 @@
                     </tbody>
                 </table>
                 <div class="text-center">
-                    <button class="btn btn-success" v-show="session.exercises.length > 0">Submit Session</button>
+                    <button class="btn btn-success" v-show="session.exercises.length > 0" @click="submitSession">Submit Session</button>
                 </div>
             </div>
             <div class="col">
@@ -150,6 +150,12 @@ export default {
         }
     },
     methods: {
+        submitSession() {
+            axios.post('/api/session', this.session).then(response => {
+                console.log(response);
+            })
+
+        },
         nextStep() {
             this.step++;
         },

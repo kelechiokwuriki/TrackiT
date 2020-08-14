@@ -2637,6 +2637,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    submitSession: function submitSession() {
+      axios.post('/api/session', this.session).then(function (response) {
+        console.log(response);
+      });
+    },
     nextStep: function nextStep() {
       this.step++;
     },
@@ -58235,7 +58240,8 @@ var render = function() {
                   expression: "session.exercises.length > 0"
                 }
               ],
-              staticClass: "btn btn-success"
+              staticClass: "btn btn-success",
+              on: { click: _vm.submitSession }
             },
             [_vm._v("Submit Session")]
           )
@@ -70846,6 +70852,7 @@ try {
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + Laravel.apiToken;
 
 __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
