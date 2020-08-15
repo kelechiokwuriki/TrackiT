@@ -5,6 +5,8 @@ window.Vue = require('vue');
 import VueNumberInput from '@chenfengyuan/vue-number-input';
 import vSelect from 'vue-select';
 import 'vue-select/dist/vue-select.css';
+import Chartkick from 'vue-chartkick';
+import Chart from 'chart.js';
 
 
 Vue.component('add-session-component', require('./components/session/AddSession.vue').default);
@@ -19,6 +21,10 @@ Vue.component('status-component', require('./components/modules/Status.vue').def
 //plugins
 Vue.component('number-input', VueNumberInput);
 Vue.component('v-select', vSelect);
+
+
+Vue.use(Chartkick.use(Chart));
+
 
 window.eventBus = new Vue({});
 

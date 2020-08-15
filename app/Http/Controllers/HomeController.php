@@ -29,7 +29,8 @@ class HomeController extends Controller
     public function index()
     {
         $dashboardData = [
-            'totalSession' => $this->dashboardService->getTotalSessionsForLoggedInUser(),
+            'totalSessionCount' => $this->dashboardService->getTotalSessionsCountForLoggedInUser(),
+            'allSessions' => $this->dashboardService->getAllSessionsForLoggedInUser(),
             'lastSession' => $this->dashboardService->getLastSessionForLoggedInUser()
         ];
 

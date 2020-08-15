@@ -23,6 +23,7 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::resource('mysessions', 'MySessionsController');
+    Route::get('/mysessions', 'SessionsController@mysessions');
+    Route::resource('sessions', 'SessionsController');
 });
 

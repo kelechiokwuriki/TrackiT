@@ -25,11 +25,13 @@
     },
     "dependencies": {
         "@chenfengyuan/vue-number-input": "^1.2.1",
+        "chart.js": "^2.9.3",
         "datatables.net-bs4": "^1.10.21",
         "datatables.net-buttons-bs4": "^1.6.3",
         "datatables.net-responsive-bs4": "^2.2.5",
         "moment": "^2.27.0",
         "pdfmake": "^0.1.68",
+        "vue-chartkick": "^0.6.1",
         "vue-select": "^3.10.8"
     }
 }

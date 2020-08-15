@@ -13,7 +13,12 @@ class DashboardService
         $this->sessionRepository = $sessionRepository;
     }
 
-    public function getTotalSessionsForLoggedInUser()
+    public function getAllSessionsForLoggedInUser()
+    {
+        return $this->sessionRepository->getSessionsForLoggedInUser()->get();
+    }
+
+    public function getTotalSessionsCountForLoggedInUser()
     {
         return $this->sessionRepository->getSessionsForLoggedInUser()->count();
     }
