@@ -12,6 +12,7 @@ import Chart from 'chart.js';
 Vue.component('add-session-component', require('./components/session/AddSession.vue').default);
 Vue.component('dashboard-component', require('./components/Dashboard/Dashboard.vue').default);
 Vue.component('my-sessions-component', require('./components/session/MySessions.vue').default);
+Vue.component('view-my-session-component', require('./components/session/ViewMySession.vue').default);
 
 
 //modules

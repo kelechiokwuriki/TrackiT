@@ -2,10 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\SessionResource;
+use App\Services\SessionService;
 use Illuminate\Http\Request;
+
+use function GuzzleHttp\json_encode;
 
 class SessionsController extends Controller
 {
+    protected $sessionService;
+
+    public function __construct(SessionService $sessionService)
+    {
+        $this->sessionService = $sessionService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -38,9 +49,11 @@ class SessionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $session = new SessionResource($this->sessionService->getSessionBySlug($slug));
+
+        return view('session.viewmysession')->with(['session' => json_encode($session)]);
     }
 
     /**

@@ -43,6 +43,11 @@ class SessionService
         }
     }
 
+    public function getSessionBySlug(string $slug)
+    {
+        return $this->sessionRepository->where('slug', $slug)->first();
+    }
+
     public function getSessionForLoggedInUser()
     {
         try{
