@@ -64,4 +64,9 @@ abstract class BaseRepository
     {
         return $this->model->destroy($id);
     }
+
+    public function getByOrder(string $column, string $orderType)
+    {
+        return $this->model->orderBy($column, $orderType);
+    }
 }

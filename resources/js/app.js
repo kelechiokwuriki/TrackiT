@@ -7,13 +7,13 @@ import vSelect from 'vue-select';
 import 'vue-select/dist/vue-select.css';
 
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('add-session-component', require('./components/session/AddSession.vue').default);
+Vue.component('dashboard-component', require('./components/Dashboard/Dashboard.vue').default);
 
-Vue.component('add-session-component', require('./components/session/AddSessionComponent.vue').default);
 
 
 //modules
-Vue.component('status-component', require('./components/modules/StatusComponent.vue').default);
+Vue.component('status-component', require('./components/modules/Status.vue').default);
 
 
 //plugins

@@ -2,5 +2,6 @@
 
 @section('content')
     <status-component></status-component>
-    <add-session-component></add-session-component>
+    <dashboard-component></dashboard-component>
+    {{-- <add-session-component></add-session-component> --}}
 @endsection

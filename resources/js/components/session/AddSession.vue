@@ -53,6 +53,12 @@
                                     <input type="text" v-model="session.name" class="form-control" id="session-name" aria-describedby="session-name-help"
                                     placeholder="E.g. Full Body Workout or Upper Body Workout">
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="session-body-weight">Body Weight</label>
+                                    <input type="text" v-model="session.body_weight" class="form-control" id="session-body-weight"
+                                    aria-describedby="session-body-weight" placeholder="E.g. 73kg or 110lbs">
+                                </div>
                             </form>
                         </template>
                         <!--end add session name-->
@@ -137,6 +143,7 @@ export default {
             weightOptions: ['kg', 'lbs'],
             session:{
                 name: '',
+                body_weight: '',
                 exercises: []
             },
             exercise: {
