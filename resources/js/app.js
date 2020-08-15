@@ -9,7 +9,7 @@ import 'vue-select/dist/vue-select.css';
 
 Vue.component('add-session-component', require('./components/session/AddSession.vue').default);
 Vue.component('dashboard-component', require('./components/Dashboard/Dashboard.vue').default);
-
+Vue.component('my-sessions-component', require('./components/session/MySessions.vue').default);
 
 
 //modules

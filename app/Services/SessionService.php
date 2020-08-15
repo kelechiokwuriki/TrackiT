@@ -39,7 +39,24 @@ class SessionService
         }
     }
 
-    public function createExercisesForSession(array $exercises, int $sessionId)
+    public function getSessionForLoggedInUser()
+    {
+        try{
+            return $this->sessionRepository->getSessionsForLoggedInUser()->get();
+        } catch(Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    public function transformSessionData(array $sessionData)
+    {
+        return [
+            'name' => $sessionData['name'],
+            'user_id' => $sessionData['user_id']
+        ];
+    }
+
+    private function createExercisesForSession(array $exercises, int $sessionId)
     {
         foreach($exercises['exercises'] as $exercise) {
             $exercise['session_id'] = $sessionId;
@@ -51,13 +68,5 @@ class SessionService
                 throw new Exception($e->getMessage());
             }
         }
-    }
-
-    public function transformSessionData(array $sessionData)
-    {
-        return [
-            'name' => $sessionData['name'],
-            'user_id' => $sessionData['user_id']
-        ];
     }
 }

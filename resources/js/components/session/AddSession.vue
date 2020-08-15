@@ -98,7 +98,7 @@
                                     <div class="col">
                                         <!--exercise weight type-->
                                         <div class="form-group">
-                                            <label for="exercise-type">Weight Type</label>
+                                            <label for="exercise-type">Weight Type (Please be consistent in your selection)</label>
                                             <v-select v-model="exercise.weight_type" :options="weightOptions"></v-select>
                                         </div>
                                         <!--end exercise weight type-->

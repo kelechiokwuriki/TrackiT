@@ -13,13 +13,13 @@ class DashboardService
         $this->sessionRepository = $sessionRepository;
     }
 
-    public function getTotalSessions()
+    public function getTotalSessionsForLoggedInUser()
     {
-        return $this->sessionRepository->all()->count();
+        return $this->sessionRepository->getSessionsForLoggedInUser()->count();
     }
 
-    public function getLastSession()
+    public function getLastSessionForLoggedInUser()
     {
-        return $this->sessionRepository->getByOrder('created_at', 'DESC')->first();
+        return $this->sessionRepository->getSessionsForLoggedInUser()->orderBy('created_at', 'DESC')->first();
     }
 }

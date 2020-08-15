@@ -12,5 +12,12 @@ class SessionRepository extends BaseRepository
     public function __construct(Session $sessionModel)
     {
         parent::__construct($sessionModel);
+
+        $this->sessionModel = $sessionModel;
+    }
+
+    public function getSessionsForLoggedInUser()
+    {
+        return $this->sessionModel->where('user_id', auth()->id());
     }
 }
