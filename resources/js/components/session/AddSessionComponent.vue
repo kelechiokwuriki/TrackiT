@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="col">
+            <div class="col-sm-6">
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -28,7 +28,7 @@
                     <button class="btn btn-success" v-show="session.exercises.length > 0" @click="submitSession">Submit Session</button>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-sm-6">
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex justify-content-between">
