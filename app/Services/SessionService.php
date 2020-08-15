@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\ExerciseRepository;
 use App\Repositories\SessionRepository;
+use App\Services\Utility\SlugService;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
@@ -11,11 +12,14 @@ class SessionService
 {
     protected $sessionRepository;
     protected $exerciseRepository;
+    protected $slugService;
 
-    public function __construct(SessionRepository $sessionRepository, ExerciseRepository $exerciseRepository)
+    public function __construct(SessionRepository $sessionRepository,
+    ExerciseRepository $exerciseRepository, SlugService $slugService)
     {
         $this->sessionRepository = $sessionRepository;
         $this->exerciseRepository = $exerciseRepository;
+        $this->slugService = $slugService;
     }
 
     public function createSession(array $session)
@@ -52,7 +56,9 @@ class SessionService
     {
         return [
             'name' => $sessionData['name'],
-            'user_id' => $sessionData['user_id']
+            'user_id' => $sessionData['user_id'],
+            'body_weight' => $sessionData['body_weight'],
+            'slug' => $this->slugService->createSlugFrom($sessionData['name'])
         ];
     }
 

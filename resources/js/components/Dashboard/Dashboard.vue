@@ -44,7 +44,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-sm font-weight-bold text-warning text-uppercase mb-1">Latest Body Weight</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">73kg</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{ dashboarddata.lastSession.body_weight }}</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-weight fa-2x text-gray-300"></i>

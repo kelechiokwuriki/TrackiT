@@ -60,15 +60,15 @@
                     <div class="container">
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item mr-4 {{ request()->is('home') ? 'active' : '' }}">
-                                <a class="nav-link" href="/home">
+                            <li class="nav-item mr-4">
+                                <a class="nav-link {{ request()->is('home') ? 'active text-success font-weight-bold' : '' }}" href="/home">
                                     <i class="fas fa-fw fa-tachometer-alt mr-1"></i>
                                     Dashboard
                                 </a>
                             </li>
 
-                            <li class="nav-item {{ request()->is('mysessions') ? 'active' : '' }}">
-                                <a class="nav-link" href="/mysessions">
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->is('mysessions') ? 'active text-success font-weight-bold' : '' }}" href="/mysessions">
                                     <i class="fas fa-dumbbell mr-1"></i>
                                     My Sessions
                                 </a>
@@ -115,6 +115,8 @@
         </nav>
 
         <main class="py-4">
+            <status-component></status-component>
+
             @yield('content')
         </main>
     </div>

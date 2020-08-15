@@ -21,18 +21,18 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Body Weight at session</th>
                                 <th scope="col">Total Weight Lifted at Session</th>
-                                <th scope="col">Exercises</th>
+                                <th scope="col">Exercises Performed</th>
                                 <th scope="col" class="d-none d-sm-none d-md-block d-sm-block">Date</th>
                             </tr>
                         </thead>
-                        <tbody>
-                        <tr v-for="(session, index) in sessions" v-bind:key="index">
-                        <td>{{session.name}}</td>
-                        <td>{{session.body_weight}}</td>
-                        <td>{{session.total_weight_lifted_at_session}}</td>
-                        <td>{{session.exercises}}</td>
-                        <td>{{ moment(session.created_at).format("MMM Do YYYY hh:mm a") }}</td>
-                    </tr>
+                        <tbody class="sessions-table-data">
+                            <tr v-for="(session, index) in sessions" v-bind:key="index" @click="navigateTo(session.slug)">
+                                <td><a :href="'/sessions/'+ session.slug">{{session.name}}</a></td>
+                                <td>{{session.body_weight}}</td>
+                                <td>{{session.total_weight_lifted_at_session}} kg</td>
+                                <td>{{session.exercises}}</td>
+                                <td>{{ moment(session.created_at).format("MMM Do YYYY hh:mm a") }}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -52,6 +52,9 @@ export default {
         this.getSessions();
     },
     methods: {
+        navigateTo(slug) {
+            window.location = '/sessions/'+slug;
+        },
         moment(date) {
             return moment(date);
         },
@@ -72,3 +75,9 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+    .sessions-table-data {
+        cursor: pointer;
+    }
+</style>

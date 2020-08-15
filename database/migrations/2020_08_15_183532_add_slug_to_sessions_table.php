@@ -14,7 +14,7 @@ class AddSlugToSessionsTable extends Migration
     public function up()
     {
         Schema::table('sessions', function (Blueprint $table) {
-            //
+            $table->string('slug');
         });
     }
 
@@ -26,7 +26,7 @@ class AddSlugToSessionsTable extends Migration
     public function down()
     {
         Schema::table('sessions', function (Blueprint $table) {
-            //
+            $table->dropColumn('slug');
         });
     }
 }
