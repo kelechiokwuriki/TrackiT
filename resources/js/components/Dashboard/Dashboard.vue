@@ -10,7 +10,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Sessions</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">60</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{ dashboarddata.totalSession }}</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-dumbbell fa-2x text-gray-300"></i>
@@ -27,7 +27,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Last Session</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">5th March 2020</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{ dashboarddata.lastSession.name }}</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -43,10 +43,10 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks</div>
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Last Session Date</div>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ moment(dashboarddata.lastSession.created_at).format("MMM Do YYYY hh:mm a") }}</div>
                         </div>
                         <div class="col">
                           <div class="progress progress-sm mr-2">
@@ -88,6 +88,17 @@
 
 <script>
 export default {
+
+    methods: {
+        moment(date) {
+            return moment(date);
+        },
+    },
+    props: {
+        dashboarddata: {
+            type: Object
+        }
+    }
 
 }
 </script>

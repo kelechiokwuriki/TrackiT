@@ -13,11 +13,13 @@ class DashboardService
         $this->sessionRepository = $sessionRepository;
     }
 
-    public function getDashBoardData()
+    public function getTotalSessions()
     {
-        $totalSessions = $this->sessionRepository->all()->count();
-        $lastSession = $this->sessionRepository->getByOrder('created_at', 'DESC')->first();
-        $lastestBodyWeight = $lastSession->bodyWeight;
+        return $this->sessionRepository->all()->count();
+    }
 
+    public function getLastSession()
+    {
+        return $this->sessionRepository->getByOrder('created_at', 'DESC')->first();
     }
 }

@@ -13,6 +13,8 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/sb-admin-2.js') }}" defer></script>
     <!-- Core plugin JavaScript-->
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+
     <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
     <!-- Custom scripts for all pages-->
