@@ -30,7 +30,7 @@
                                 <td><a :href="'/sessions/'+ session.slug">{{session.name}}</a></td>
                                 <td>{{session.body_weight}}</td>
                                 <td>{{session.total_weight_lifted_at_session}} kg</td>
-                                <td>{{session.exercises}}</td>
+                                <td>{{session.exercises_count}}</td>
                                 <td>{{ moment(session.created_at).format("MMM Do YYYY hh:mm a") }}</td>
                             </tr>
                         </tbody>

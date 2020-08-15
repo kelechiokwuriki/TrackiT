@@ -18,7 +18,8 @@ class SessionResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'body_weight' => $this->body_weight,
-            'exercises' => $this->exercises()->count(),
+            'exercises_count' => $this->exercises()->count(),
+            'exercises' => $this->exercises,
             'total_weight_lifted_at_session' => $this->exercises()->sum('weight_number'),
             'slug' => $this->slug,
             'created_at' => $this->created_at
