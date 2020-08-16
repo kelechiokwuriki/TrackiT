@@ -30,7 +30,7 @@ class SessionService
 
         $sessionAttributes = $this->transformSessionData($session);
 
-        try {
+        // try {
             //session id present means we are updating
             if($sessionId) {
                 $sessionResult = $this->sessionRepository->update($sessionId, $sessionAttributes);
@@ -48,9 +48,9 @@ class SessionService
             }
 
             return $sessionResult;
-        } catch(Exception $e) {
-            Log::debug(self::class . 'Error updating/creating session with data: ' . $session . ' Reason: ' . $e->getMessage());
-        }
+        // } catch(Exception $e) {
+        //     Log::debug(self::class . 'Error updating/creating session with data: ' . json_encode($session) . ' Reason: ' . $e->getMessage());
+        // }
     }
 
     public function deleteSession(int $id)
@@ -92,19 +92,20 @@ class SessionService
 
     private function updateOrCreateExercisesForSession(array $exercises, int $sessionId)
     {
-        try {
+        // try {
             foreach($exercises['exercises'] as $exercise) {
                 $exercise['session_id'] = $sessionId;
                 $exercise['user_id'] = auth()->id();
 
-                if($this->exerciseRepository->where('id', $exercise['id'])->exists()) {
+                if(isset($exercise['id']) && ($this->exerciseRepository->where('id', $exercise['id'])->exists())) {
                     $this->exerciseRepository->update($exercise['id'], $exercise);
                 } else {
+                    Log::debug('here');
                     $this->exerciseRepository->create($exercise);
                 }
             }
-        } catch(Exception $e) {
-            Log::debug(self::class . 'Error updating/creating exercises with data:' . $exercises . 'reason: ' . $e->getMessage());
-        }
+        // } catch(Exception $e) {
+        //     Log::debug(self::class . 'Error updating/creating exercises with data:' . json_encode($exercises) . 'reason: ' . $e->getMessage());
+        // }
     }
 }

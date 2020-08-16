@@ -2815,7 +2815,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     submitSession: function submitSession() {
       axios.post('/api/sessions', this.session).then(function (response) {
-        if (response.status === 200) {
+        if (response.status === 201) {
           var statusMessage = {
             statusColor: 'alert-success',
             status: 'success',

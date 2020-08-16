@@ -148,7 +148,7 @@ export default {
     methods: {
         submitSession() {
             axios.post('/api/sessions', this.session).then(response => {
-                if(response.status === 200) {
+                if(response.status === 201) {
 
                     let statusMessage = {
                         statusColor: 'alert-success',
