@@ -45,12 +45,7 @@ class SessionApiController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            return $this->sessionService->updateOrCreateSession($request->all());
-
-        } catch(Exception $e) {
-            Log::debug('Error creating session, reason: ' . $e->getMessage());
-        }
+        return $this->sessionService->updateOrCreateSession($request->all());
     }
 
     /**
@@ -75,12 +70,7 @@ class SessionApiController extends Controller
     {
         $request->request->remove('id');
 
-        try {
-            return $this->sessionService->updateOrCreateSession($request->all(), $id);
-
-        } catch(Exception $e) {
-            Log::debug('Error updating session, reason: ' . $e->getMessage());
-        }
+        return $this->sessionService->updateOrCreateSession($request->all(), $id);
     }
 
     /**

@@ -202,22 +202,15 @@ export default {
         },
         updateSession() {
              axios.put('/api/sessions/' + this.session.id, this.session).then(response => {
-                console.log(response);
+                if(response.data === 1) {
+                    let statusMessage = {
+                        statusColor: 'alert-success',
+                        status: 'success',
+                        message: 'Session updated successfully!'
+                    };
+                    window.eventBus.$emit('status', statusMessage);
+                }
             });
-
-            // axios.put('/api/sessions/', this.session).then(response => {
-            //     if(response.status === 200) {
-
-            //         let statusMessage = {
-            //             statusColor: 'alert-success',
-            //             status: 'success',
-            //             message: 'Session created successfully!'
-            //         };
-
-            //         window.eventBus.$emit('status', statusMessage);
-            //     }
-            // })
-
         },
         clearExerciseForm() {
             this.exercise.name = '';

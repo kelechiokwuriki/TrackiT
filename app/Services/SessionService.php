@@ -37,7 +37,7 @@ class SessionService
 
                 $this->updateOrCreateExercisesForSession($session, $sessionId);
 
-                return $session;
+                return $sessionResult;
             }
 
             //no sesson id so lets make a new one
@@ -47,7 +47,7 @@ class SessionService
                 $this->updateOrCreateExercisesForSession($session, $sessionResult->id);
             }
 
-            return $session;
+            return $sessionResult;
         } catch(Exception $e) {
             Log::debug(self::class . 'Error updating/creating session with data: ' . $session . ' Reason: ' . $e->getMessage());
         }

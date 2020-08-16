@@ -3068,17 +3068,15 @@ __webpack_require__.r(__webpack_exports__);
     },
     updateSession: function updateSession() {
       axios.put('/api/sessions/' + this.session.id, this.session).then(function (response) {
-        console.log(response);
-      }); // axios.put('/api/sessions/', this.session).then(response => {
-      //     if(response.status === 200) {
-      //         let statusMessage = {
-      //             statusColor: 'alert-success',
-      //             status: 'success',
-      //             message: 'Session created successfully!'
-      //         };
-      //         window.eventBus.$emit('status', statusMessage);
-      //     }
-      // })
+        if (response.data === 1) {
+          var statusMessage = {
+            statusColor: 'alert-success',
+            status: 'success',
+            message: 'Session updated successfully!'
+          };
+          window.eventBus.$emit('status', statusMessage);
+        }
+      });
     },
     clearExerciseForm: function clearExerciseForm() {
       this.exercise.name = '';
