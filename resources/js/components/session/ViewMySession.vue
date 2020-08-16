@@ -9,7 +9,7 @@
                         <h4 class="m-0 font-weight-bold text-success">{{ session.name }} Session</h4>
                     </div>
                     <div>
-                        <button class="btn btn-secondary">Edit session</button>
+                        <a :href="'/sessions/' + session.slug + '/edit'" class="btn btn-secondary">Edit session</a>
                         <button class="btn btn-danger" @click="showDeleteConfirmation">Delete session</button>
 
                     </div>
@@ -99,7 +99,7 @@ export default {
             $('#deleteSessionModal').modal('show');
         },
         deleteSession() {
-            axios.delete('/api/session/' + this.session.id).then(response => {
+            axios.delete('/api/sessions/' + this.session.id).then(response => {
                 if(response.data === 1) {
                     window.location = '/mysessions';
                 }

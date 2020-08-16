@@ -22,7 +22,7 @@ class SessionService
         $this->slugService = $slugService;
     }
 
-    public function createSession(array $session)
+    public function updateOrCreateSession(array $session, $sessionId = null)
     {
         if(!isset($session) || empty($session)) {
             throw new Exception('Session is empty. Could not create');
@@ -31,26 +31,44 @@ class SessionService
         $sessionAttributes = $this->transformSessionData($session);
 
         try {
+            //session id present means we are updating
+            if($sessionId) {
+                $sessionResult = $this->sessionRepository->update($sessionId, $sessionAttributes);
+
+                $this->updateOrCreateExercisesForSession($session, $sessionId);
+
+                return $session;
+            }
+
+            //no sesson id so lets make a new one
             $sessionResult = $this->sessionRepository->create($sessionAttributes);
 
             if($sessionResult) {
-                $this->createExercisesForSession($session, $sessionResult->id);
+                $this->updateOrCreateExercisesForSession($session, $sessionResult->id);
             }
 
             return $session;
         } catch(Exception $e) {
-            throw new Exception($e->getMessage());
+            Log::debug(self::class . 'Error updating/creating session with data: ' . $session . ' Reason: ' . $e->getMessage());
         }
     }
 
     public function deleteSession(int $id)
     {
-        return $this->sessionRepository->delete($id);
+        try {
+            return $this->sessionRepository->delete($id);
+        } catch (Exception $e) {
+            Log::debug(self::class . 'Error deleting session with id: ' . $id . ' Reason: ' . $e->getMessage());
+        }
     }
 
     public function getSessionBySlug(string $slug)
     {
-        return $this->sessionRepository->where('slug', $slug)->first();
+        try{
+            return $this->sessionRepository->where('slug', $slug)->first();
+        } catch(Exception $e) {
+            Log::debug(self::class . 'Error fetching session with slug: ' . $slug . ' Reason: ' . $e->getMessage());
+        }
     }
 
     public function getSessionForLoggedInUser()
@@ -58,7 +76,7 @@ class SessionService
         try{
             return $this->sessionRepository->getSessionsForLoggedInUser()->get();
         } catch(Exception $e) {
-            throw new Exception($e->getMessage());
+            Log::debug(self::class . 'Error fetching session, reason: ' . $e->getMessage());
         }
     }
 
@@ -66,23 +84,27 @@ class SessionService
     {
         return [
             'name' => $sessionData['name'],
-            'user_id' => $sessionData['user_id'],
+            'user_id' => auth()->id(),
             'body_weight' => $sessionData['body_weight'],
             'slug' => $this->slugService->createSlugFrom($sessionData['name'])
         ];
     }
 
-    private function createExercisesForSession(array $exercises, int $sessionId)
+    private function updateOrCreateExercisesForSession(array $exercises, int $sessionId)
     {
-        foreach($exercises['exercises'] as $exercise) {
-            $exercise['session_id'] = $sessionId;
-            $exercise['user_id'] = $exercises['user_id'];
+        try {
+            foreach($exercises['exercises'] as $exercise) {
+                $exercise['session_id'] = $sessionId;
+                $exercise['user_id'] = auth()->id();
 
-            try {
-                $this->exerciseRepository->create($exercise);
-            } catch(Exception $e) {
-                throw new Exception($e->getMessage());
+                if($this->exerciseRepository->where('id', $exercise['id'])->exists()) {
+                    $this->exerciseRepository->update($exercise['id'], $exercise);
+                } else {
+                    $this->exerciseRepository->create($exercise);
+                }
             }
+        } catch(Exception $e) {
+            Log::debug(self::class . 'Error updating/creating exercises with data:' . $exercises . 'reason: ' . $e->getMessage());
         }
     }
 }

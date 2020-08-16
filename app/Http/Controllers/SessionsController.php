@@ -67,7 +67,25 @@ class SessionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
+    {
+        $sessionFound = $this->sessionService->getSessionBySlug($slug);
+
+        if($sessionFound) {
+            return view('session.editsession')->with(['session' => json_encode(new SessionResource($sessionFound))]);
+        }
+
+        return redirect('/home');
+    }
+
+      /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
     {
         //
     }

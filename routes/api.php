@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => 'auth:api'], function () {
-    Route::resource('session', 'Api\SessionApiController');
+    Route::resource('sessions', 'Api\SessionApiController');
     Route::resource('mysessions', 'Api\MySessionsApiController');
 
 });

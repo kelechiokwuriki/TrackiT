@@ -33,7 +33,7 @@
                     <div class="card-header">
                         <div class="d-flex justify-content-between">
                             <div class="mt-2">
-                                Add Session
+                                <h4>Add Session</h4>
                             </div>
                             <div>
                                 <button class="btn btn-secondary" @click="previousStep" v-show="step === totalSteps">Go Back</button>
@@ -147,7 +147,7 @@ export default {
     },
     methods: {
         submitSession() {
-            axios.post('/api/session', this.session).then(response => {
+            axios.post('/api/sessions', this.session).then(response => {
                 if(response.status === 200) {
 
                     let statusMessage = {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SessionResource;
 use App\Services\SessionService;
 use Exception;
 use Illuminate\Http\Request;
@@ -45,9 +46,7 @@ class SessionApiController extends Controller
     public function store(Request $request)
     {
         try {
-            $request->request->set('user_id', auth()->id());
-
-            return $this->sessionService->createSession($request->all());
+            return $this->sessionService->updateOrCreateSession($request->all());
 
         } catch(Exception $e) {
             Log::debug('Error creating session, reason: ' . $e->getMessage());
@@ -60,20 +59,9 @@ class SessionApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $sessionFound = new SessionResource($this->sessionService->getSessionBySlug($slug));
     }
 
     /**
@@ -85,7 +73,14 @@ class SessionApiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->request->remove('id');
+
+        try {
+            return $this->sessionService->updateOrCreateSession($request->all(), $id);
+
+        } catch(Exception $e) {
+            Log::debug('Error updating session, reason: ' . $e->getMessage());
+        }
     }
 
     /**
