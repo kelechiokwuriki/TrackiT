@@ -2790,7 +2790,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3025,7 +3024,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {// session: {}
+    };
+  },
+  methods: {
+    deleteSession: function deleteSession() {
+      axios["delete"]('/api/session/' + this.session.id).then(function (response) {
+        console.log(response);
+
+        if (response.data === 1) {
+          window.location = '/mysessions';
+        }
+      });
+    }
+  },
+  mounted: function mounted() {// this.getSession();
+  },
   props: {
     session: {
       type: Object
@@ -98217,42 +98238,33 @@ var render = function() {
                         })
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "session-body-weight" } }, [
-                          _vm._v("Body Weight in Kg")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c(
+                            "label",
+                            { attrs: { for: "session-body-weight" } },
+                            [_vm._v("Body Weight in KG")]
+                          ),
+                          _vm._v(" "),
+                          _c("number-input", {
+                            attrs: {
+                              id: "exercise-weight",
+                              min: 1,
+                              controls: ""
+                            },
+                            model: {
                               value: _vm.session.body_weight,
+                              callback: function($$v) {
+                                _vm.$set(_vm.session, "body_weight", $$v)
+                              },
                               expression: "session.body_weight"
                             }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            id: "session-body-weight",
-                            "aria-describedby": "session-body-weight",
-                            placeholder: "E.g. 73 kg or 110 lbs"
-                          },
-                          domProps: { value: _vm.session.body_weight },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.session,
-                                "body_weight",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ])
+                          })
+                        ],
+                        1
+                      )
                     ])
                   ]
                 : _vm._e(),
@@ -98340,77 +98352,31 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col" }, [
-                          _c(
-                            "div",
-                            { staticClass: "form-group" },
-                            [
-                              _c(
-                                "label",
-                                { attrs: { for: "exercise-weight" } },
-                                [_vm._v("Weight")]
-                              ),
-                              _vm._v(" "),
-                              _c("number-input", {
-                                attrs: {
-                                  id: "exercise-weight",
-                                  min: 1,
-                                  controls: ""
-                                },
-                                model: {
-                                  value: _vm.exercise.weight_number,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.exercise, "weight_number", $$v)
-                                  },
-                                  expression: "exercise.weight_number"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col" }, [
-                          _c(
-                            "div",
-                            { staticClass: "form-group" },
-                            [
-                              _c("label", { attrs: { for: "exercise-type" } }, [
-                                _vm._v("Weight Type ")
-                              ]),
-                              _vm._v(" "),
-                              _c("v-select", {
-                                attrs: {
-                                  options: _vm.weightOptions,
-                                  "aria-describedby": "weight-type-help"
-                                },
-                                model: {
-                                  value: _vm.exercise.weight_type,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.exercise, "weight_type", $$v)
-                                  },
-                                  expression: "exercise.weight_type"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "small",
-                                {
-                                  staticClass: "form-text text-danger",
-                                  attrs: { id: "weight-type-help" }
-                                },
-                                [
-                                  _vm._v(
-                                    "Please be consistent for all exercises"
-                                  )
-                                ]
-                              )
-                            ],
-                            1
-                          )
-                        ])
-                      ]),
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c("label", { attrs: { for: "exercise-weight" } }, [
+                            _vm._v("Weight lifted in KG")
+                          ]),
+                          _vm._v(" "),
+                          _c("number-input", {
+                            attrs: {
+                              id: "exercise-weight",
+                              min: 0,
+                              controls: ""
+                            },
+                            model: {
+                              value: _vm.exercise.weight_number,
+                              callback: function($$v) {
+                                _vm.$set(_vm.exercise, "weight_number", $$v)
+                              },
+                              expression: "exercise.weight_number"
+                            }
+                          })
+                        ],
+                        1
+                      ),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -98645,15 +98611,11 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [
-          _vm._v("Body Weight at session")
-        ]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Body Weight")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [
-          _vm._v("Total Weight Lifted at Session")
-        ]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Total Weight Lifted")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Exercises Performed")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Exercises")]),
         _vm._v(" "),
         _c(
           "th",
@@ -98691,9 +98653,26 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "card shadow" }, [
       _c("div", { staticClass: "card-header py-3" }, [
-        _c("div", { staticClass: "text-center" }, [
-          _c("h4", { staticClass: "m-0 font-weight-bold text-success" }, [
-            _vm._v(_vm._s(_vm.session.name))
+        _c("div", { staticClass: "d-flex justify-content-between" }, [
+          _c("div", [
+            _c("h4", { staticClass: "m-0 font-weight-bold text-success" }, [
+              _vm._v(_vm._s(_vm.session.name) + " Session")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("button", { staticClass: "btn btn-warning" }, [
+              _vm._v("Edit session")
+            ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger",
+                on: { click: _vm.deleteSession }
+              },
+              [_vm._v("Delete session")]
+            )
           ])
         ])
       ]),
@@ -98707,7 +98686,7 @@ var render = function() {
                 _vm._v(
                   " Body Weight " +
                     _vm._s(_vm.session.body_weight) +
-                    "\n                            "
+                    "\n                        "
                 )
               ])
             ])
@@ -98720,14 +98699,14 @@ var render = function() {
                 _vm._v(
                   " Total Weight carried " +
                     _vm._s(_vm.session.total_weight_lifted_at_session) +
-                    " kg\n                            "
+                    " kg\n                        "
                 )
               ])
             ])
           ])
         ]),
         _vm._v(" "),
-        _c("table", { staticClass: "table" }, [
+        _c("table", { staticClass: "table table-hover text-center" }, [
           _vm._m(0),
           _vm._v(" "),
           _c(
@@ -98739,6 +98718,8 @@ var render = function() {
                 _c("td", [_vm._v(_vm._s(exercise.name))]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(exercise.type))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(exercise.weight_number) + " kg")]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(exercise.sets))]),
                 _vm._v(" "),
@@ -98764,6 +98745,8 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Type")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Weight")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Sets")]),
         _vm._v(" "),

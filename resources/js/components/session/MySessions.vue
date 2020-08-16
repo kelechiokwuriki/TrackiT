@@ -19,9 +19,9 @@
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col">Name</th>
-                                <th scope="col">Body Weight at session</th>
-                                <th scope="col">Total Weight Lifted at Session</th>
-                                <th scope="col">Exercises Performed</th>
+                                <th scope="col">Body Weight</th>
+                                <th scope="col">Total Weight Lifted</th>
+                                <th scope="col">Exercises</th>
                                 <th scope="col" class="d-none d-sm-none d-md-block d-sm-block">Date</th>
                             </tr>
                         </thead>

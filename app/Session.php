@@ -19,4 +19,15 @@ class Session extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        self::deleting(function($session) {
+            $session->exercises()->each(function($exercise){
+                $exercise->delete();
+            });
+        });
+    }
 }

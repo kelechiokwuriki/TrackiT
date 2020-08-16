@@ -96,6 +96,6 @@ class SessionApiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return $this->sessionService->deleteSession($id);
     }
 }

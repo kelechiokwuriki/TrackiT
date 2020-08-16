@@ -43,6 +43,11 @@ class SessionService
         }
     }
 
+    public function deleteSession(int $id)
+    {
+        return $this->sessionRepository->delete($id);
+    }
+
     public function getSessionBySlug(string $slug)
     {
         return $this->sessionRepository->where('slug', $slug)->first();
