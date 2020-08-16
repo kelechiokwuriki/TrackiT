@@ -2569,6 +2569,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2654,17 +2666,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -3029,23 +3030,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {// session: {}
     };
   },
   methods: {
+    showDeleteConfirmation: function showDeleteConfirmation() {
+      $('#deleteSessionModal').modal('show');
+    },
     deleteSession: function deleteSession() {
       axios["delete"]('/api/session/' + this.session.id).then(function (response) {
-        console.log(response);
-
         if (response.data === 1) {
           window.location = '/mysessions';
         }
       });
     }
   },
-  mounted: function mounted() {// this.getSession();
+  mounted: function mounted() {
+    console.log('mounted'); // this.getSession();
   },
   props: {
     session: {
@@ -97731,19 +97756,53 @@ var render = function() {
                         [_vm._v("Total Sessions")]
                       ),
                       _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "h5 mb-0 font-weight-bold text-gray-800"
-                        },
-                        [_vm._v(_vm._s(_vm.dashboarddata.totalSessionCount))]
-                      )
+                      _vm.dashboarddata.totalSessionCount > 0
+                        ? _c(
+                            "div",
+                            {
+                              staticClass:
+                                "h5 mb-0 font-weight-bold text-gray-800"
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.dashboarddata.totalSessionCount)
+                              )
+                            ]
+                          )
+                        : _c(
+                            "div",
+                            {
+                              staticClass:
+                                "h5 mb-0 font-weight-bold text-gray-800"
+                            },
+                            [
+                              _c("a", { attrs: { href: "/sessions/create" } }, [
+                                _vm._v("Add a session")
+                              ])
+                            ]
+                          )
                     ]),
                     _vm._v(" "),
                     _vm._m(0)
                   ]
                 )
-              ])
+              ]),
+              _vm._v(" "),
+              _vm.dashboarddata.lastSession
+                ? _c("div", { staticClass: "card-footer" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-success",
+                        attrs: {
+                          href:
+                            "/sessions/" + _vm.dashboarddata.lastSession.slug
+                        }
+                      },
+                      [_vm._v("View session")]
+                    )
+                  ])
+                : _vm._e()
             ]
           )
         ]),
@@ -97768,19 +97827,55 @@ var render = function() {
                         [_vm._v("Last Session")]
                       ),
                       _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "h5 mb-0 font-weight-bold text-gray-800"
-                        },
-                        [_vm._v(_vm._s(_vm.dashboarddata.lastSession.name))]
-                      )
+                      _vm.dashboarddata.lastSession
+                        ? _c(
+                            "div",
+                            {
+                              staticClass:
+                                "h5 mb-0 font-weight-bold text-gray-800"
+                            },
+                            [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(_vm.dashboarddata.lastSession.name) +
+                                  "\n                            "
+                              )
+                            ]
+                          )
+                        : _c(
+                            "div",
+                            {
+                              staticClass:
+                                "h5 mb-0 font-weight-bold text-gray-800"
+                            },
+                            [
+                              _c("a", { attrs: { href: "/sessions/create" } }, [
+                                _vm._v("Add a session")
+                              ])
+                            ]
+                          )
                     ]),
                     _vm._v(" "),
                     _vm._m(1)
                   ]
                 )
-              ])
+              ]),
+              _vm._v(" "),
+              _vm.dashboarddata.lastSession
+                ? _c("div", { staticClass: "card-footer" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-success",
+                        attrs: {
+                          href:
+                            "/sessions/" + _vm.dashboarddata.lastSession.slug
+                        }
+                      },
+                      [_vm._v("View session")]
+                    )
+                  ])
+                : _vm._e()
             ]
           )
         ]),
@@ -97802,26 +97897,58 @@ var render = function() {
                           staticClass:
                             "text-sm font-weight-bold text-warning text-uppercase mb-1"
                         },
-                        [_vm._v("Latest Body Weight")]
+                        [_vm._v("Last Body Weight")]
                       ),
                       _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "h5 mb-0 font-weight-bold text-gray-800"
-                        },
-                        [
-                          _vm._v(
-                            _vm._s(_vm.dashboarddata.lastSession.body_weight)
+                      _vm.dashboarddata.lastSession
+                        ? _c(
+                            "div",
+                            {
+                              staticClass:
+                                "h5 mb-0 font-weight-bold text-gray-800"
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(
+                                  _vm.dashboarddata.lastSession.body_weight
+                                )
+                              )
+                            ]
                           )
-                        ]
-                      )
+                        : _c(
+                            "div",
+                            {
+                              staticClass:
+                                "h5 mb-0 font-weight-bold text-gray-800"
+                            },
+                            [
+                              _c("a", { attrs: { href: "/sessions/create" } }, [
+                                _vm._v("Add a session")
+                              ])
+                            ]
+                          )
                     ]),
                     _vm._v(" "),
                     _vm._m(2)
                   ]
                 )
-              ])
+              ]),
+              _vm._v(" "),
+              _vm.dashboarddata.lastSession
+                ? _c("div", { staticClass: "card-footer" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-success",
+                        attrs: {
+                          href:
+                            "/sessions/" + _vm.dashboarddata.lastSession.slug
+                        }
+                      },
+                      [_vm._v("View session")]
+                    )
+                  ])
+                : _vm._e()
             ]
           )
         ]),
@@ -97846,40 +97973,59 @@ var render = function() {
                         [_vm._v("Last Session Date")]
                       ),
                       _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "row no-gutters align-items-center" },
-                        [
-                          _c("div", { staticClass: "col-auto" }, [
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "h5 mb-0 mr-3 font-weight-bold text-gray-800"
-                              },
-                              [
-                                _vm._v(
-                                  _vm._s(
-                                    _vm
-                                      .moment(
-                                        _vm.dashboarddata.lastSession.created_at
-                                      )
-                                      .format("MMM Do YYYY hh:mm a")
-                                  )
+                      _vm.dashboarddata.lastSession
+                        ? _c(
+                            "div",
+                            {
+                              staticClass:
+                                "h5 mb-0 font-weight-bold text-gray-800"
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(
+                                  _vm
+                                    .moment(
+                                      _vm.dashboarddata.lastSession.created_at
+                                    )
+                                    .format("MMM Do YYYY hh:mm a")
                                 )
-                              ]
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _vm._m(3)
-                        ]
-                      )
+                              )
+                            ]
+                          )
+                        : _c(
+                            "div",
+                            {
+                              staticClass:
+                                "h5 mb-0 font-weight-bold text-gray-800"
+                            },
+                            [
+                              _c("a", { attrs: { href: "/sessions/create" } }, [
+                                _vm._v("Add a session")
+                              ])
+                            ]
+                          )
                     ]),
                     _vm._v(" "),
-                    _vm._m(4)
+                    _vm._m(3)
                   ]
                 )
-              ])
+              ]),
+              _vm._v(" "),
+              _vm.dashboarddata.lastSession
+                ? _c("div", { staticClass: "card-footer" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-success",
+                        attrs: {
+                          href:
+                            "/sessions/" + _vm.dashboarddata.lastSession.slug
+                        }
+                      },
+                      [_vm._v("View session")]
+                    )
+                  ])
+                : _vm._e()
             ]
           )
         ])
@@ -97887,7 +98033,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card shadow mb-4" }, [
-      _vm._m(5),
+      _vm._m(4),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [_c("line-chart")], 1)
     ])
@@ -97916,25 +98062,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-auto" }, [
       _c("i", { staticClass: "fas fa-weight fa-2x text-gray-300" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col" }, [
-      _c("div", { staticClass: "progress progress-sm mr-2" }, [
-        _c("div", {
-          staticClass: "progress-bar bg-info",
-          staticStyle: { width: "50%" },
-          attrs: {
-            role: "progressbar",
-            "aria-valuenow": "50",
-            "aria-valuemin": "0",
-            "aria-valuemax": "100"
-          }
-        })
-      ])
     ])
   },
   function() {
@@ -98250,7 +98377,7 @@ var render = function() {
                           _vm._v(" "),
                           _c("number-input", {
                             attrs: {
-                              id: "exercise-weight",
+                              id: "session-body-weight",
                               min: 1,
                               controls: ""
                             },
@@ -98661,7 +98788,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", [
-            _c("button", { staticClass: "btn btn-warning" }, [
+            _c("button", { staticClass: "btn btn-secondary" }, [
               _vm._v("Edit session")
             ]),
             _vm._v(" "),
@@ -98669,7 +98796,7 @@ var render = function() {
               "button",
               {
                 staticClass: "btn btn-danger",
-                on: { click: _vm.deleteSession }
+                on: { click: _vm.showDeleteConfirmation }
               },
               [_vm._v("Delete session")]
             )
@@ -98730,7 +98857,56 @@ var render = function() {
           )
         ])
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "deleteSessionModal",
+          tabindex: "-1",
+          "aria-labelledby": "deleteSessionModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c("div", { staticClass: "modal-dialog" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _vm._v(
+                "\n                Delete " +
+                  _vm._s(_vm.session.name) +
+                  " session?\n            "
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-secondary",
+                  attrs: { type: "button", "data-dismiss": "modal" }
+                },
+                [_vm._v("Close")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger",
+                  attrs: { type: "button" },
+                  on: { click: _vm.deleteSession }
+                },
+                [_vm._v("Yes")]
+              )
+            ])
+          ])
+        ])
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -98752,6 +98928,34 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Reps")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        {
+          staticClass: "modal-title",
+          attrs: { id: "deleteSessionModalLabel" }
+        },
+        [_vm._v("Confirmation")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
     ])
   }
 ]

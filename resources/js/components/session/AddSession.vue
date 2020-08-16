@@ -56,7 +56,7 @@
 
                                 <div class="form-group">
                                     <label for="session-body-weight">Body Weight in KG</label>
-                                    <number-input v-model="session.body_weight" id="exercise-weight" :min="1" controls></number-input>
+                                    <number-input v-model="session.body_weight" id="session-body-weight" :min="1" controls></number-input>
                                 </div>
                             </form>
                         </template>
@@ -85,25 +85,14 @@
                                     </div>
                                 </div>
 
-                                <!-- <div class="row"> -->
-                                    <!-- <div class="col"> -->
-                                        <!--exercise weight-->
-                                        <div class="form-group">
-                                            <label for="exercise-weight">Weight lifted in KG</label>
-                                            <number-input v-model="exercise.weight_number" id="exercise-weight" :min="0" controls></number-input>
-                                        </div>
-                                        <!--end exercise weight-->
-                                    <!-- </div> -->
-                                    <!-- <div class="col"> -->
-                                        <!--exercise weight type-->
-                                        <!-- <div class="form-group">
-                                            <label for="exercise-type">Weight Type </label>
-                                            <v-select v-model="exercise.weight_type" :options="weightOptions" aria-describedby="weight-type-help"></v-select>
-                                            <small id="weight-type-help" class="form-text text-danger">Please be consistent for all exercises</small>
-                                        </div> -->
-                                        <!--end exercise weight type-->
-                                    <!-- </div> -->
-                                <!-- </div> -->
+
+                                <!--exercise weight-->
+                                <div class="form-group">
+                                    <label for="exercise-weight">Weight lifted in KG</label>
+                                    <number-input v-model="exercise.weight_number" id="exercise-weight" :min="0" controls></number-input>
+                                </div>
+                                <!--end exercise weight-->
+
 
                                 <!--exercise set-->
                                 <div class="form-group">

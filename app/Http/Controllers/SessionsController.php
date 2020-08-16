@@ -51,9 +51,14 @@ class SessionsController extends Controller
      */
     public function show($slug)
     {
-        $session = new SessionResource($this->sessionService->getSessionBySlug($slug));
+        $sessionFound = $this->sessionService->getSessionBySlug($slug);
 
-        return view('session.viewmysession')->with(['session' => json_encode($session)]);
+        if($sessionFound) {
+            return view('session.viewmysession')->with(['session' => json_encode(new SessionResource($sessionFound))]);
+
+        }
+
+        return redirect('/home');
     }
 
     /**

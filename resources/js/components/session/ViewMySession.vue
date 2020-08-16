@@ -9,8 +9,8 @@
                         <h4 class="m-0 font-weight-bold text-success">{{ session.name }} Session</h4>
                     </div>
                     <div>
-                        <button class="btn btn-warning">Edit session</button>
-                        <button class="btn btn-danger" @click="deleteSession">Delete session</button>
+                        <button class="btn btn-secondary">Edit session</button>
+                        <button class="btn btn-danger" @click="showDeleteConfirmation">Delete session</button>
 
                     </div>
                 </div>
@@ -62,6 +62,28 @@
                 </table>
             </div>
         </div>
+
+        <!--delete confirmation modal-->
+        <div class="modal fade" id="deleteSessionModal" tabindex="-1" aria-labelledby="deleteSessionModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteSessionModalLabel">Confirmation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Delete {{ session.name }} session?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" @click="deleteSession">Yes</button>
+                </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -73,9 +95,11 @@ export default {
         }
     },
     methods: {
+        showDeleteConfirmation() {
+            $('#deleteSessionModal').modal('show');
+        },
         deleteSession() {
             axios.delete('/api/session/' + this.session.id).then(response => {
-                console.log(response);
                 if(response.data === 1) {
                     window.location = '/mysessions';
                 }
@@ -83,6 +107,7 @@ export default {
         }
     },
     mounted() {
+        console.log('mounted');
         // this.getSession();
     },
     props: {
