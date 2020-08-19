@@ -2800,11 +2800,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      isExerciseNameValid: '',
       step: 1,
       totalSteps: 2,
       weightOptions: ['kg', 'lbs'],
@@ -2869,18 +2867,15 @@ __webpack_require__.r(__webpack_exports__);
       this.clearExerciseForm();
     }
   },
-  watch: {
-    isExerciseNameValid: function isExerciseNameValid(value) {},
-    exercise: {
-      handler: function handler(exerciseObject) {
-        if (this.isExerciseNameValid === 'is-invalid' && exerciseObject.name.length > 0) {
-          this.isExerciseNameValid = 'is-valid';
-        }
-      },
-      deep: true
+  computed: {
+    allowAddingExercise: function allowAddingExercise() {
+      if (this.exercise.name === '') {
+        return true;
+      }
+
+      return false;
     }
-  },
-  computed: {}
+  }
 });
 
 /***/ }),
@@ -98693,7 +98688,6 @@ var render = function() {
                                   }
                                 ],
                                 staticClass: "form-control",
-                                class: _vm.isExerciseNameValid,
                                 attrs: {
                                   type: "text",
                                   id: "exercise-name",
@@ -98857,7 +98851,10 @@ var render = function() {
                             "button",
                             {
                               staticClass: "btn btn-success",
-                              attrs: { type: "submit" },
+                              attrs: {
+                                type: "submit",
+                                disabled: _vm.allowAddingExercise
+                              },
                               on: { click: _vm.addExercise }
                             },
                             [_vm._v("Add Exercise")]

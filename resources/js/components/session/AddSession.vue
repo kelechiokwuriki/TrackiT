@@ -71,7 +71,6 @@
                                         <div class="form-group">
                                             <label for="exercise-name">Exercise Name</label>
                                             <input type="text" v-model="exercise.name" class="form-control"
-                                            :class="isExerciseNameValid"
                                             id="exercise-name" aria-describedby="session-name-help"
                                             placeholder="E.g. Bench press" required>
 
@@ -119,7 +118,7 @@
                                 <!--end exercise reps-->
 
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-success" @click="addExercise">Add Exercise</button>
+                                    <button type="submit" class="btn btn-success" @click="addExercise" :disabled="allowAddingExercise">Add Exercise</button>
                                 </div>
 
                             </form>
@@ -137,7 +136,6 @@
 export default {
     data() {
         return {
-            isExerciseNameValid: '',
             step: 1,
             totalSteps: 2,
             weightOptions: ['kg', 'lbs'],
@@ -207,21 +205,13 @@ export default {
             this.clearExerciseForm();
         }
     },
-    watch: {
-        isExerciseNameValid(value) {
-
-        },
-        exercise: {
-            handler(exerciseObject) {
-                if(this.isExerciseNameValid === 'is-invalid' && exerciseObject.name.length > 0) {
-                    this.isExerciseNameValid = 'is-valid';
-                }
-            },
-            deep: true
-        }
-    },
     computed: {
-
+        allowAddingExercise() {
+            if(this.exercise.name === '') {
+                return true;
+            }
+            return false;
+        }
     }
 
 }
