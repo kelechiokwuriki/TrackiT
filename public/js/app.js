@@ -2869,11 +2869,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     allowAddingExercise: function allowAddingExercise() {
-      if (this.exercise.name === '') {
-        return true;
-      }
-
-      return false;
+      return this.exercise.name === '' ? true : false;
     }
   }
 });
@@ -3121,6 +3117,15 @@ __webpack_require__.r(__webpack_exports__);
       };
       this.session.exercises.push(exercise);
       this.clearExerciseForm();
+    }
+  },
+  computed: {
+    allowSavingExercise: function allowSavingExercise() {
+      if (this.exercise.name === '' || this.exercise.type === '') {
+        return true;
+      }
+
+      return false;
     }
   }
 });
@@ -99246,7 +99251,7 @@ var render = function() {
                 "button",
                 {
                   staticClass: "btn btn-danger",
-                  attrs: { type: "button" },
+                  attrs: { type: "button", disabled: _vm.allowSavingExercise },
                   on: { click: _vm.saveExercise }
                 },
                 [_vm._v("Save")]

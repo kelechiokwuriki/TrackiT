@@ -207,10 +207,7 @@ export default {
     },
     computed: {
         allowAddingExercise() {
-            if(this.exercise.name === '') {
-                return true;
-            }
-            return false;
+            return this.exercise.name === '' ? true : false;
         }
     }
 

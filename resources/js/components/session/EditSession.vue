@@ -136,7 +136,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" @click="saveExercise">Save</button>
+                    <button type="button" class="btn btn-danger" @click="saveExercise" :disabled="allowSavingExercise">Save</button>
                 </div>
                 </div>
             </div>
@@ -235,6 +235,15 @@ export default {
             this.session.exercises.push(exercise);
 
             this.clearExerciseForm();
+        }
+    },
+    computed: {
+        allowSavingExercise() {
+            if(this.exercise.name === '' || this.exercise.type === '') {
+                return true;
+            }
+
+            return false;
         }
     }
 
