@@ -2791,9 +2791,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      isExerciseNameValid: '',
       step: 1,
       totalSteps: 2,
       weightOptions: ['kg', 'lbs'],
@@ -2841,6 +2852,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     addExercise: function addExercise(e) {
       e.preventDefault();
+
+      if (this.exercise.name === '') {
+        return this.isExerciseNameValid = 'is-invalid';
+      }
+
       var exercise = {
         name: this.exercise.name,
         type: this.exercise.type,
@@ -2852,7 +2868,19 @@ __webpack_require__.r(__webpack_exports__);
       this.session.exercises.push(exercise);
       this.clearExerciseForm();
     }
-  }
+  },
+  watch: {
+    isExerciseNameValid: function isExerciseNameValid(value) {},
+    exercise: {
+      handler: function handler(exerciseObject) {
+        if (this.isExerciseNameValid === 'is-invalid' && exerciseObject.name.length > 0) {
+          this.isExerciseNameValid = 'is-valid';
+        }
+      },
+      deep: true
+    }
+  },
+  computed: {}
 });
 
 /***/ }),
@@ -98641,176 +98669,202 @@ var render = function() {
               _vm._v(" "),
               _vm.step === _vm.totalSteps
                 ? [
-                    _c("form", [
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col" }, [
-                          _c("div", { staticClass: "form-group" }, [
-                            _c("label", { attrs: { for: "exercise-name" } }, [
-                              _vm._v("Exercise Name")
-                            ]),
-                            _vm._v(" "),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.exercise.name,
-                                  expression: "exercise.name"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              attrs: {
-                                type: "text",
-                                id: "exercise-name",
-                                "aria-describedby": "session-name-help",
-                                placeholder: "E.g. Bench press"
-                              },
-                              domProps: { value: _vm.exercise.name },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
+                    _c(
+                      "form",
+                      {
+                        staticClass: "needs-validation",
+                        attrs: { novalidate: "" }
+                      },
+                      [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "exercise-name" } }, [
+                                _vm._v("Exercise Name")
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.exercise.name,
+                                    expression: "exercise.name"
                                   }
-                                  _vm.$set(
-                                    _vm.exercise,
-                                    "name",
-                                    $event.target.value
-                                  )
+                                ],
+                                staticClass: "form-control",
+                                class: _vm.isExerciseNameValid,
+                                attrs: {
+                                  type: "text",
+                                  id: "exercise-name",
+                                  "aria-describedby": "session-name-help",
+                                  placeholder: "E.g. Bench press",
+                                  required: ""
+                                },
+                                domProps: { value: _vm.exercise.name },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.exercise,
+                                      "name",
+                                      $event.target.value
+                                    )
+                                  }
                                 }
-                              }
-                            })
+                              }),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "valid-feedback" }, [
+                                _vm._v(
+                                  "\n                                            Looks good!\n                                        "
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "invalid-feedback" }, [
+                                _vm._v(
+                                  "\n                                            Did you forget the exercise name?\n                                        "
+                                )
+                              ])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "exercise-type" } }, [
+                                _vm._v("Exercise Type")
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.exercise.type,
+                                    expression: "exercise.type"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  id: "exercise-type",
+                                  "aria-describedby": "session-name-help",
+                                  placeholder: "E.g. Warm up",
+                                  required: ""
+                                },
+                                domProps: { value: _vm.exercise.type },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.exercise,
+                                      "type",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
                           ])
                         ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "col" }, [
-                          _c("div", { staticClass: "form-group" }, [
-                            _c("label", { attrs: { for: "exercise-type" } }, [
-                              _vm._v("Exercise Type")
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c("label", { attrs: { for: "exercise-weight" } }, [
+                              _vm._v("Weight lifted in KG")
                             ]),
                             _vm._v(" "),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.exercise.type,
-                                  expression: "exercise.type"
-                                }
-                              ],
-                              staticClass: "form-control",
+                            _c("number-input", {
                               attrs: {
-                                type: "text",
-                                id: "exercise-type",
-                                "aria-describedby": "session-name-help",
-                                placeholder: "E.g. Warm up"
+                                id: "exercise-weight",
+                                min: 0,
+                                controls: "",
+                                required: ""
                               },
-                              domProps: { value: _vm.exercise.type },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.exercise,
-                                    "type",
-                                    $event.target.value
-                                  )
-                                }
+                              model: {
+                                value: _vm.exercise.weight_number,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.exercise, "weight_number", $$v)
+                                },
+                                expression: "exercise.weight_number"
                               }
                             })
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "form-group" },
-                        [
-                          _c("label", { attrs: { for: "exercise-weight" } }, [
-                            _vm._v("Weight lifted in KG")
-                          ]),
-                          _vm._v(" "),
-                          _c("number-input", {
-                            attrs: {
-                              id: "exercise-weight",
-                              min: 0,
-                              controls: ""
-                            },
-                            model: {
-                              value: _vm.exercise.weight_number,
-                              callback: function($$v) {
-                                _vm.$set(_vm.exercise, "weight_number", $$v)
-                              },
-                              expression: "exercise.weight_number"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "form-group" },
-                        [
-                          _c("label", { attrs: { for: "exercise-sets" } }, [
-                            _vm._v("How many sets?")
-                          ]),
-                          _vm._v(" "),
-                          _c("number-input", {
-                            attrs: {
-                              id: "exercise-sets",
-                              min: 1,
-                              controls: ""
-                            },
-                            model: {
-                              value: _vm.exercise.sets,
-                              callback: function($$v) {
-                                _vm.$set(_vm.exercise, "sets", $$v)
-                              },
-                              expression: "exercise.sets"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "form-group" },
-                        [
-                          _c("label", { attrs: { for: "exercise-reps" } }, [
-                            _vm._v("How many reps?")
-                          ]),
-                          _vm._v(" "),
-                          _c("number-input", {
-                            attrs: {
-                              id: "exercise-reps",
-                              min: 1,
-                              controls: ""
-                            },
-                            model: {
-                              value: _vm.exercise.reps,
-                              callback: function($$v) {
-                                _vm.$set(_vm.exercise, "reps", $$v)
-                              },
-                              expression: "exercise.reps"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "text-center" }, [
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
                         _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-success",
-                            on: { click: _vm.addExercise }
-                          },
-                          [_vm._v("Add Exercise")]
-                        )
-                      ])
-                    ])
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c("label", { attrs: { for: "exercise-sets" } }, [
+                              _vm._v("How many sets?")
+                            ]),
+                            _vm._v(" "),
+                            _c("number-input", {
+                              attrs: {
+                                id: "exercise-sets",
+                                min: 1,
+                                controls: "",
+                                required: ""
+                              },
+                              model: {
+                                value: _vm.exercise.sets,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.exercise, "sets", $$v)
+                                },
+                                expression: "exercise.sets"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c("label", { attrs: { for: "exercise-reps" } }, [
+                              _vm._v("How many reps?")
+                            ]),
+                            _vm._v(" "),
+                            _c("number-input", {
+                              attrs: {
+                                id: "exercise-reps",
+                                min: 1,
+                                controls: "",
+                                required: ""
+                              },
+                              model: {
+                                value: _vm.exercise.reps,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.exercise, "reps", $$v)
+                                },
+                                expression: "exercise.reps"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-center" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success",
+                              attrs: { type: "submit" },
+                              on: { click: _vm.addExercise }
+                            },
+                            [_vm._v("Add Exercise")]
+                          )
+                        ])
+                      ]
+                    )
                   ]
                 : _vm._e()
             ],

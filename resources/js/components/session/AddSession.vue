@@ -64,14 +64,23 @@
 
                         <!--Add Exercises-->
                         <template v-if="step === totalSteps">
-                            <form>
+                            <form class="needs-validation" novalidate>
                                 <div class="row">
                                     <div class="col">
                                         <!--exercise name-->
                                         <div class="form-group">
                                             <label for="exercise-name">Exercise Name</label>
-                                            <input type="text" v-model="exercise.name" class="form-control" id="exercise-name" aria-describedby="session-name-help"
-                                            placeholder="E.g. Bench press">
+                                            <input type="text" v-model="exercise.name" class="form-control"
+                                            :class="isExerciseNameValid"
+                                            id="exercise-name" aria-describedby="session-name-help"
+                                            placeholder="E.g. Bench press" required>
+
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Did you forget the exercise name?
+                                            </div>
                                         </div>
                                         <!--end exercise name-->
                                     </div>
@@ -80,7 +89,7 @@
                                         <div class="form-group">
                                             <label for="exercise-type">Exercise Type</label>
                                             <input type="text" v-model="exercise.type" class="form-control" id="exercise-type" aria-describedby="session-name-help"
-                                            placeholder="E.g. Warm up">
+                                            placeholder="E.g. Warm up" required>
                                         </div>
                                     </div>
                                 </div>
@@ -89,7 +98,8 @@
                                 <!--exercise weight-->
                                 <div class="form-group">
                                     <label for="exercise-weight">Weight lifted in KG</label>
-                                    <number-input v-model="exercise.weight_number" id="exercise-weight" :min="0" controls></number-input>
+                                    <number-input v-model="exercise.weight_number"
+                                    id="exercise-weight" :min="0" controls required></number-input>
                                 </div>
                                 <!--end exercise weight-->
 
@@ -97,19 +107,19 @@
                                 <!--exercise set-->
                                 <div class="form-group">
                                     <label for="exercise-sets">How many sets?</label>
-                                    <number-input v-model="exercise.sets" id="exercise-sets" :min="1" controls></number-input>
+                                    <number-input v-model="exercise.sets" id="exercise-sets" :min="1" controls required></number-input>
                                 </div>
                                 <!--end exercise set-->
 
                                 <!--exercise reps-->
                                 <div class="form-group">
                                     <label for="exercise-reps">How many reps?</label>
-                                    <number-input v-model="exercise.reps" id="exercise-reps" :min="1" controls></number-input>
+                                    <number-input v-model="exercise.reps" id="exercise-reps" :min="1" controls required></number-input>
                                 </div>
                                 <!--end exercise reps-->
 
                                 <div class="text-center">
-                                    <button class="btn btn-success" @click="addExercise">Add Exercise</button>
+                                    <button type="submit" class="btn btn-success" @click="addExercise">Add Exercise</button>
                                 </div>
 
                             </form>
@@ -127,6 +137,7 @@
 export default {
     data() {
         return {
+            isExerciseNameValid: '',
             step: 1,
             totalSteps: 2,
             weightOptions: ['kg', 'lbs'],
@@ -178,6 +189,10 @@ export default {
         addExercise(e) {
             e.preventDefault();
 
+             if(this.exercise.name === '') {
+                return this.isExerciseNameValid = 'is-invalid';
+            }
+
             let exercise = {
                 name: this.exercise.name,
                 type: this.exercise.type,
@@ -191,6 +206,22 @@ export default {
 
             this.clearExerciseForm();
         }
+    },
+    watch: {
+        isExerciseNameValid(value) {
+
+        },
+        exercise: {
+            handler(exerciseObject) {
+                if(this.isExerciseNameValid === 'is-invalid' && exerciseObject.name.length > 0) {
+                    this.isExerciseNameValid = 'is-valid';
+                }
+            },
+            deep: true
+        }
+    },
+    computed: {
+
     }
 
 }
