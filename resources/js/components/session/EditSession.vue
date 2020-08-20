@@ -24,9 +24,8 @@
                             <td>{{ exercise.sets }}</td>
                             <td>{{ exercise.reps }}</td>
                             <td>
-                                <button class="btn btn-sm btn-secondary" @click="showEditExerciseModal(exercise)">Edit exercise</button>
+                                <button class="btn btn-sm btn-secondary" @click="showEditExerciseModal(exercise, index)">Edit exercise</button>
                                 <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
-
                             </td>
                         </tr>
                     </tbody>
@@ -76,71 +75,7 @@
         </div>
 
         <!--edit confirmation modal-->
-        <div class="modal fade" id="editSessionModal" tabindex="-1" aria-labelledby="editSessionModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editSessionModalLabel">Editing {{exercise.name}}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <!--exercise name and type -->
-                        <div class="row">
-                            <div class="col">
-                                <!--exercise name-->
-                                <div class="form-group">
-                                    <label for="exercise-name">Exercise Name</label>
-                                    <input type="text" v-model="exercise.name" class="form-control" id="exercise-name" aria-describedby="session-name-help"
-                                    placeholder="E.g. Bench press">
-                                </div>
-                                <!--end exercise name-->
-                            </div>
-                            <div class="col">
-                                <!--exercise type-->
-                                <div class="form-group">
-                                    <label for="exercise-type">Exercise Type</label>
-                                    <input type="text" v-model="exercise.type" class="form-control" id="exercise-type" aria-describedby="session-name-help"
-                                    placeholder="E.g. Warm up">
-                                </div>
-                            </div>
-                        </div>
-                        <!--end exercise name and type -->
-
-
-                        <!--exercise weight-->
-                        <div class="form-group">
-                            <label for="exercise-weight">Weight lifted in KG</label>
-                            <number-input v-model="exercise.weight_number" id="exercise-weight" :min="0" controls></number-input>
-                        </div>
-                        <!--end exercise weight-->
-
-
-                        <!--exercise set-->
-                        <div class="form-group">
-                            <label for="exercise-sets">How many sets?</label>
-                            <number-input v-model="exercise.sets" id="exercise-sets" :min="1" controls></number-input>
-                        </div>
-                        <!--end exercise set-->
-
-                        <!--exercise reps-->
-                        <div class="form-group">
-                            <label for="exercise-reps">How many reps?</label>
-                            <number-input v-model="exercise.reps" id="exercise-reps" :min="1" controls></number-input>
-                        </div>
-                        <!--end exercise reps-->
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" @click="saveExercise" :disabled="allowSavingExercise">Save</button>
-                </div>
-                </div>
-            </div>
-        </div>
+        <edit-exercise-modal-component :exerciseData="exercise" v-on:edit-exercise="saveEditedExercise"></edit-exercise-modal-component>
         <!--end edit confirmation modal-->
 
     </div>
@@ -172,22 +107,20 @@ export default {
         }
     },
     methods: {
-        getIndexFromExerciseArray() {
-            return this.session.exercises.findIndex(exercise => exercise.id === this.exercise.id);
-        },
-        saveExercise() {
-            let index = this.getIndexFromExerciseArray();
+        saveEditedExercise(exerciseEdited) {
+            let index = exerciseEdited.index;
 
-            this.session.exercises[index].name = this.exercise.name;
-            this.session.exercises[index].type = this.exercise.type;
-            this.session.exercises[index].weight_number = this.exercise.weight_number;
-            this.session.exercises[index].weight_type = this.exercise.weight_type;
-            this.session.exercises[index].sets = this.exercise.sets;
-            this.session.exercises[index].reps = this.exercise.reps;
+            this.session.exercises[index].name = exerciseEdited.name;
+            this.session.exercises[index].type = exerciseEdited.type;
+            this.session.exercises[index].weight_number = exerciseEdited.weight_number;
+            this.session.exercises[index].weight_type = exerciseEdited.weight_type;
+            this.session.exercises[index].sets = exerciseEdited.sets;
+            this.session.exercises[index].reps = exerciseEdited.reps;
 
             $('#editSessionModal').modal('hide');
         },
-        showEditExerciseModal(exerciseData) {
+        showEditExerciseModal(exerciseData, index) {
+            this.exercise.index = index;
             this.exercise.id = exerciseData.id;
             this.exercise.name = exerciseData.name;
             this.exercise.type = exerciseData.type;

@@ -18,6 +18,7 @@ Vue.component('view-my-session-component', require('./components/session/ViewMyS
 
 //modules
 Vue.component('status-component', require('./components/modules/Status.vue').default);
+Vue.component('edit-exercise-modal-component', require('./components/modules/EditExerciseModal.vue').default);
 
 
 //plugins

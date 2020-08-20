@@ -23,7 +23,7 @@
                             <td>{{ exercise.sets }}</td>
                             <td>{{ exercise.reps }}</td>
                             <td>
-                                <button class="btn btn-sm btn-secondary" @click="showEditExerciseModal(exercise)">Edit exercise</button>
+                                <button class="btn btn-sm btn-secondary" @click="showEditExerciseModal(exercise, index)">Edit exercise</button>
                                 <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
 
                             </td>
@@ -136,71 +136,7 @@
         </div>
 
         <!--edit confirmation modal-->
-        <div class="modal fade" id="editSessionModal" tabindex="-1" aria-labelledby="editSessionModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editSessionModalLabel">Editing {{exerciseModalToEdit.name}}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <!--exercise name and type -->
-                        <div class="row">
-                            <div class="col">
-                                <!--exercise name-->
-                                <div class="form-group">
-                                    <label for="exercise-name">Exercise Name</label>
-                                    <input type="text" v-model="exerciseModalToEdit.name" class="form-control" id="exercise-name" aria-describedby="session-name-help"
-                                    placeholder="E.g. Bench press">
-                                </div>
-                                <!--end exercise name-->
-                            </div>
-                            <div class="col">
-                                <!--exercise type-->
-                                <div class="form-group">
-                                    <label for="exercise-type">Exercise Type</label>
-                                    <input type="text" v-model="exerciseModalToEdit.type" class="form-control" id="exercise-type" aria-describedby="session-name-help"
-                                    placeholder="E.g. Warm up">
-                                </div>
-                            </div>
-                        </div>
-                        <!--end exercise name and type -->
-
-
-                        <!--exercise weight-->
-                        <div class="form-group">
-                            <label for="exercise-weight">Weight lifted in KG</label>
-                            <number-input v-model="exerciseModalToEdit.weight_number" id="exercise-weight" :min="0" controls></number-input>
-                        </div>
-                        <!--end exercise weight-->
-
-
-                        <!--exercise set-->
-                        <div class="form-group">
-                            <label for="exercise-sets">How many sets?</label>
-                            <number-input v-model="exerciseModalToEdit.sets" id="exercise-sets" :min="1" controls></number-input>
-                        </div>
-                        <!--end exercise set-->
-
-                        <!--exercise reps-->
-                        <div class="form-group">
-                            <label for="exercise-reps">How many reps?</label>
-                            <number-input v-model="exerciseModalToEdit.reps" id="exercise-reps" :min="1" controls></number-input>
-                        </div>
-                        <!--end exercise reps-->
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" @click="saveExercise" :disabled="allowSavingExercise">Save</button>
-                </div>
-                </div>
-            </div>
-        </div>
+        <edit-exercise-modal-component :exerciseData="exerciseModalToEdit" v-on:edit-exercise="saveEditedExercise"></edit-exercise-modal-component>
         <!--end edit confirmation modal-->
     </div>
 
@@ -237,9 +173,6 @@ export default {
         }
     },
     methods: {
-        getIndexFromExerciseArray() {
-            return this.session.exercises.findIndex(exercise => exercise.id === this.exercise.id);
-        },
         submitSession() {
             axios.post('/api/sessions', this.session).then(response => {
                 if(response.status === 201) {
@@ -289,20 +222,20 @@ export default {
 
             this.clearExerciseForm();
         },
-        saveExercise() {
-            let index = this.getIndexFromExerciseArray();
+        saveEditedExercise(exerciseEdited) {
+            let index = exerciseEdited.index;
 
-            this.session.exercises[index].name = this.exerciseModalToEdit.name;
-            this.session.exercises[index].type = this.exerciseModalToEdit.type;
-            this.session.exercises[index].weight_number = this.exerciseModalToEdit.weight_number;
-            this.session.exercises[index].weight_type = this.exerciseModalToEdit.weight_type;
-            this.session.exercises[index].sets = this.exerciseModalToEdit.sets;
-            this.session.exercises[index].reps = this.exerciseModalToEdit.reps;
+            this.session.exercises[index].name = exerciseEdited.name;
+            this.session.exercises[index].type = exerciseEdited.type;
+            this.session.exercises[index].weight_number = exerciseEdited.weight_number;
+            this.session.exercises[index].weight_type = exerciseEdited.weight_type;
+            this.session.exercises[index].sets = exerciseEdited.sets;
+            this.session.exercises[index].reps = exerciseEdited.reps;
 
             $('#editSessionModal').modal('hide');
         },
-        showEditExerciseModal(exerciseData) {
-            this.exerciseModalToEdit.id = exerciseData.id;
+        showEditExerciseModal(exerciseData, index) {
+            this.exerciseModalToEdit.index = index;
             this.exerciseModalToEdit.name = exerciseData.name;
             this.exerciseModalToEdit.type = exerciseData.type;
             this.exerciseModalToEdit.weight_number = exerciseData.weight_number;
@@ -316,13 +249,6 @@ export default {
     computed: {
         allowAddingExercise() {
             return this.exercise.name === '' ? true : false;
-        },
-        allowSavingExercise() {
-            if(this.exerciseModalToEdit.name === '' || this.exerciseModalToEdit.type === '') {
-                return true;
-            }
-
-            return false;
         }
     }
 
