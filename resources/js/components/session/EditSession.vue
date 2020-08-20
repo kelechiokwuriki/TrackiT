@@ -186,8 +186,6 @@ export default {
             this.session.exercises[index].reps = this.exercise.reps;
 
             $('#editSessionModal').modal('hide');
-
-
         },
         showEditExerciseModal(exerciseData) {
             this.exercise.id = exerciseData.id;

@@ -2800,6 +2800,80 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2818,10 +2892,25 @@ __webpack_require__.r(__webpack_exports__);
         weight_type: 'kg',
         sets: null,
         reps: null
+      },
+      exerciseModalToEdit: {
+        name: '',
+        type: '',
+        weight_number: null,
+        weight_type: 'kg',
+        sets: null,
+        reps: null
       }
     };
   },
   methods: {
+    getIndexFromExerciseArray: function getIndexFromExerciseArray() {
+      var _this = this;
+
+      return this.session.exercises.findIndex(function (exercise) {
+        return exercise.id === _this.exercise.id;
+      });
+    },
     submitSession: function submitSession() {
       axios.post('/api/sessions', this.session).then(function (response) {
         if (response.status === 201) {
@@ -2865,11 +2954,38 @@ __webpack_require__.r(__webpack_exports__);
       };
       this.session.exercises.push(exercise);
       this.clearExerciseForm();
+    },
+    saveExercise: function saveExercise() {
+      var index = this.getIndexFromExerciseArray();
+      this.session.exercises[index].name = this.exerciseModalToEdit.name;
+      this.session.exercises[index].type = this.exerciseModalToEdit.type;
+      this.session.exercises[index].weight_number = this.exerciseModalToEdit.weight_number;
+      this.session.exercises[index].weight_type = this.exerciseModalToEdit.weight_type;
+      this.session.exercises[index].sets = this.exerciseModalToEdit.sets;
+      this.session.exercises[index].reps = this.exerciseModalToEdit.reps;
+      $('#editSessionModal').modal('hide');
+    },
+    showEditExerciseModal: function showEditExerciseModal(exerciseData) {
+      this.exerciseModalToEdit.id = exerciseData.id;
+      this.exerciseModalToEdit.name = exerciseData.name;
+      this.exerciseModalToEdit.type = exerciseData.type;
+      this.exerciseModalToEdit.weight_number = exerciseData.weight_number;
+      this.exerciseModalToEdit.weight_type = exerciseData.weight_type;
+      this.exerciseModalToEdit.sets = exerciseData.sets;
+      this.exerciseModalToEdit.reps = exerciseData.reps;
+      $('#editSessionModal').modal('show');
     }
   },
   computed: {
     allowAddingExercise: function allowAddingExercise() {
       return this.exercise.name === '' ? true : false;
+    },
+    allowSavingExercise: function allowSavingExercise() {
+      if (this.exerciseModalToEdit.name === '' || this.exerciseModalToEdit.type === '') {
+        return true;
+      }
+
+      return false;
     }
   }
 });
@@ -98497,7 +98613,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-sm-6" }, [
+      _c("div", { staticClass: "col-sm-8" }, [
         _c("table", { staticClass: "table table-hover" }, [
           _vm._m(0),
           _vm._v(" "),
@@ -98523,7 +98639,24 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(exercise.sets))]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(exercise.reps))])
+                _c("td", [_vm._v(_vm._s(exercise.reps))]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-sm btn-secondary",
+                      on: {
+                        click: function($event) {
+                          return _vm.showEditExerciseModal(exercise)
+                        }
+                      }
+                    },
+                    [_vm._v("Edit exercise")]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(1, true)
+                ])
               ])
             }),
             0
@@ -98550,11 +98683,11 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-sm-6" }, [
+      _c("div", { staticClass: "col-sm-4" }, [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-header" }, [
             _c("div", { staticClass: "d-flex justify-content-between" }, [
-              _vm._m(1),
+              _vm._m(2),
               _vm._v(" "),
               _c("div", [
                 _c(
@@ -98874,7 +99007,213 @@ var render = function() {
           )
         ])
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "editSessionModal",
+          tabindex: "-1",
+          "aria-labelledby": "editSessionModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c("div", { staticClass: "modal-dialog" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-header" }, [
+              _c(
+                "h5",
+                {
+                  staticClass: "modal-title",
+                  attrs: { id: "editSessionModalLabel" }
+                },
+                [_vm._v("Editing " + _vm._s(_vm.exerciseModalToEdit.name))]
+              ),
+              _vm._v(" "),
+              _vm._m(3)
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c("form", [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exercise-name" } }, [
+                        _vm._v("Exercise Name")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.exerciseModalToEdit.name,
+                            expression: "exerciseModalToEdit.name"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "exercise-name",
+                          "aria-describedby": "session-name-help",
+                          placeholder: "E.g. Bench press"
+                        },
+                        domProps: { value: _vm.exerciseModalToEdit.name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.exerciseModalToEdit,
+                              "name",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "exercise-type" } }, [
+                        _vm._v("Exercise Type")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.exerciseModalToEdit.type,
+                            expression: "exerciseModalToEdit.type"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "exercise-type",
+                          "aria-describedby": "session-name-help",
+                          placeholder: "E.g. Warm up"
+                        },
+                        domProps: { value: _vm.exerciseModalToEdit.type },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.exerciseModalToEdit,
+                              "type",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("label", { attrs: { for: "exercise-weight" } }, [
+                      _vm._v("Weight lifted in KG")
+                    ]),
+                    _vm._v(" "),
+                    _c("number-input", {
+                      attrs: { id: "exercise-weight", min: 0, controls: "" },
+                      model: {
+                        value: _vm.exerciseModalToEdit.weight_number,
+                        callback: function($$v) {
+                          _vm.$set(
+                            _vm.exerciseModalToEdit,
+                            "weight_number",
+                            $$v
+                          )
+                        },
+                        expression: "exerciseModalToEdit.weight_number"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("label", { attrs: { for: "exercise-sets" } }, [
+                      _vm._v("How many sets?")
+                    ]),
+                    _vm._v(" "),
+                    _c("number-input", {
+                      attrs: { id: "exercise-sets", min: 1, controls: "" },
+                      model: {
+                        value: _vm.exerciseModalToEdit.sets,
+                        callback: function($$v) {
+                          _vm.$set(_vm.exerciseModalToEdit, "sets", $$v)
+                        },
+                        expression: "exerciseModalToEdit.sets"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("label", { attrs: { for: "exercise-reps" } }, [
+                      _vm._v("How many reps?")
+                    ]),
+                    _vm._v(" "),
+                    _c("number-input", {
+                      attrs: { id: "exercise-reps", min: 1, controls: "" },
+                      model: {
+                        value: _vm.exerciseModalToEdit.reps,
+                        callback: function($$v) {
+                          _vm.$set(_vm.exerciseModalToEdit, "reps", $$v)
+                        },
+                        expression: "exerciseModalToEdit.reps"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-secondary",
+                  attrs: { type: "button", "data-dismiss": "modal" }
+                },
+                [_vm._v("Close")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger",
+                  attrs: { type: "button", disabled: _vm.allowSavingExercise },
+                  on: { click: _vm.saveExercise }
+                },
+                [_vm._v("Save")]
+              )
+            ])
+          ])
+        ])
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -98894,8 +99233,18 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Sets")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Reps")])
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Reps")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Action")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("button", { staticClass: "btn btn-sm btn-danger" }, [
+      _c("i", { staticClass: "fas fa-trash" })
     ])
   },
   function() {
@@ -98905,6 +99254,23 @@ var staticRenderFns = [
     return _c("div", { staticClass: "mt-2" }, [
       _c("h4", [_vm._v("Add Session")])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
   }
 ]
 render._withStripped = true
