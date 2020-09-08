@@ -15,7 +15,7 @@
             <!-- Card Body -->
             <div class="card-body">
                 <div id="data-table_wrapper" class="dataTables_wrapper no-footer">
-                    <table id="countryTable" class="table display table-hover text-center" style="width:100%">
+                    <table id="exerciseTable" class="table display table-hover text-center" style="width:100%">
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col">Name</th>
@@ -65,8 +65,13 @@ export default {
             })
             .catch(error => {})
             .finally(() => {
-                $('#countryTable').DataTable({
+                $('#exerciseTable').dataTable({
                     // "aaSorting": [[2, "asc"]],
+                    "order": [],
+                    "columnDefs": [ {
+                    "targets"  : 'no-sort',
+                    "orderable": false,
+                    }],
                     pageLength: 5,
                     lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Everything']]
                 });

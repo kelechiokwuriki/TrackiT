@@ -23,7 +23,7 @@
                     <div class="col-sm-6">
                         <div class="card bg-success text-white shadow">
                             <div class="card-body">
-                                <i class="fas fa-weight text-white"></i> Body Weight {{ session.body_weight }}
+                                <i class="fas fa-weight text-white"></i> Body Weight {{ session.body_weight }} kg
                             </div>
                         </div>
                         </div>
@@ -107,7 +107,6 @@ export default {
         }
     },
     mounted() {
-        console.log('mounted');
         // this.getSession();
     },
     props: {

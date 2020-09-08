@@ -19,6 +19,7 @@ Vue.component('view-my-session-component', require('./components/session/ViewMyS
 //modules
 Vue.component('status-component', require('./components/modules/Status.vue').default);
 Vue.component('edit-exercise-modal-component', require('./components/modules/EditExerciseModal.vue').default);
+Vue.component('chart-component', require('./components/modules/Charts.vue').default);
 
 
 //plugins

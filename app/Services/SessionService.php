@@ -74,7 +74,7 @@ class SessionService
     public function getSessionForLoggedInUser()
     {
         try{
-            return $this->sessionRepository->getSessionsForLoggedInUser()->get();
+            return $this->sessionRepository->getSessionsForLoggedInUser()->orderBy('created_at', 'desc')->get();
         } catch(Exception $e) {
             Log::debug(self::class . 'Error fetching session, reason: ' . $e->getMessage());
         }

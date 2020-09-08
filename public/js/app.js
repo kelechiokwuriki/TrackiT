@@ -2560,27 +2560,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2606,6 +2585,85 @@ __webpack_require__.r(__webpack_exports__);
       var data = {}; // for(let i = 0; i < sessions.length; i++) {
       //     data[sessions[i].created_at] =
       // }
+    }
+  },
+  props: {
+    dashboarddata: {
+      type: Object
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modules/Charts.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/modules/Charts.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      chartData: {}
+    };
+  },
+  created: function created() {
+    this.transformDataForChart();
+  },
+  methods: {
+    moment: function (_moment) {
+      function moment(_x) {
+        return _moment.apply(this, arguments);
+      }
+
+      moment.toString = function () {
+        return _moment.toString();
+      };
+
+      return moment;
+    }(function (date) {
+      return moment(date);
+    }),
+    transformDataForChart: function transformDataForChart() {
+      var sessions = this.dashboarddata.allSessions;
+
+      for (var i = 0; i < sessions.length; i++) {
+        var date = this.moment(sessions[i].created_at).format('YYYY-MM-DD');
+        this.chartData[date] = sessions[i].body_weight;
+      }
     }
   },
   props: {
@@ -3297,8 +3355,13 @@ __webpack_require__.r(__webpack_exports__);
         console.log(response);
         _this.sessions = response.data.data;
       })["catch"](function (error) {})["finally"](function () {
-        $('#countryTable').DataTable({
+        $('#exerciseTable').dataTable({
           // "aaSorting": [[2, "asc"]],
+          "order": [],
+          "columnDefs": [{
+            "targets": 'no-sort',
+            "orderable": false
+          }],
           pageLength: 5,
           lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Everything']]
         });
@@ -3424,8 +3487,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  mounted: function mounted() {
-    console.log('mounted'); // this.getSession();
+  mounted: function mounted() {// this.getSession();
   },
   props: {
     session: {
@@ -98088,311 +98150,317 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "top-widgets" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-xl-3 col-md-6 mb-4" }, [
-          _c(
-            "div",
-            { staticClass: "card border-left-primary shadow h-100 py-2" },
-            [
-              _c("div", { staticClass: "card-body" }, [
-                _c(
-                  "div",
-                  { staticClass: "row no-gutters align-items-center" },
-                  [
-                    _c("div", { staticClass: "col mr-2" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "text-sm font-weight-bold text-primary text-uppercase mb-1"
-                        },
-                        [_vm._v("Total Sessions")]
-                      ),
-                      _vm._v(" "),
-                      _vm.dashboarddata.totalSessionCount > 0
-                        ? _c(
-                            "div",
-                            {
-                              staticClass:
-                                "h5 mb-0 font-weight-bold text-gray-800"
-                            },
-                            [
-                              _vm._v(
-                                _vm._s(_vm.dashboarddata.totalSessionCount)
-                              )
-                            ]
-                          )
-                        : _c(
-                            "div",
-                            {
-                              staticClass:
-                                "h5 mb-0 font-weight-bold text-gray-800"
-                            },
-                            [
-                              _c("a", { attrs: { href: "/sessions/create" } }, [
-                                _vm._v("Add a session")
-                              ])
-                            ]
-                          )
-                    ]),
-                    _vm._v(" "),
-                    _vm._m(0)
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _vm.dashboarddata.lastSession
-                ? _c("div", { staticClass: "card-footer" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-success",
-                        attrs: {
-                          href:
-                            "/sessions/" + _vm.dashboarddata.lastSession.slug
-                        }
-                      },
-                      [_vm._v("View session")]
-                    )
-                  ])
-                : _vm._e()
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-xl-3 col-md-6 mb-4" }, [
-          _c(
-            "div",
-            { staticClass: "card border-left-success shadow h-100 py-2" },
-            [
-              _c("div", { staticClass: "card-body" }, [
-                _c(
-                  "div",
-                  { staticClass: "row no-gutters align-items-center" },
-                  [
-                    _c("div", { staticClass: "col mr-2" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "text-sm font-weight-bold text-success text-uppercase mb-1"
-                        },
-                        [_vm._v("Last Session")]
-                      ),
-                      _vm._v(" "),
-                      _vm.dashboarddata.lastSession
-                        ? _c(
-                            "div",
-                            {
-                              staticClass:
-                                "h5 mb-0 font-weight-bold text-gray-800"
-                            },
-                            [
-                              _vm._v(
-                                "\n                                " +
-                                  _vm._s(_vm.dashboarddata.lastSession.name) +
-                                  "\n                            "
-                              )
-                            ]
-                          )
-                        : _c(
-                            "div",
-                            {
-                              staticClass:
-                                "h5 mb-0 font-weight-bold text-gray-800"
-                            },
-                            [
-                              _c("a", { attrs: { href: "/sessions/create" } }, [
-                                _vm._v("Add a session")
-                              ])
-                            ]
-                          )
-                    ]),
-                    _vm._v(" "),
-                    _vm._m(1)
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _vm.dashboarddata.lastSession
-                ? _c("div", { staticClass: "card-footer" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-success",
-                        attrs: {
-                          href:
-                            "/sessions/" + _vm.dashboarddata.lastSession.slug
-                        }
-                      },
-                      [_vm._v("View session")]
-                    )
-                  ])
-                : _vm._e()
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-xl-3 col-md-6 mb-4" }, [
-          _c(
-            "div",
-            { staticClass: "card border-left-warning shadow h-100 py-2" },
-            [
-              _c("div", { staticClass: "card-body" }, [
-                _c(
-                  "div",
-                  { staticClass: "row no-gutters align-items-center" },
-                  [
-                    _c("div", { staticClass: "col mr-2" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "text-sm font-weight-bold text-warning text-uppercase mb-1"
-                        },
-                        [_vm._v("Last Body Weight")]
-                      ),
-                      _vm._v(" "),
-                      _vm.dashboarddata.lastSession
-                        ? _c(
-                            "div",
-                            {
-                              staticClass:
-                                "h5 mb-0 font-weight-bold text-gray-800"
-                            },
-                            [
-                              _vm._v(
-                                _vm._s(
-                                  _vm.dashboarddata.lastSession.body_weight
+  return _c(
+    "div",
+    { staticClass: "container" },
+    [
+      _c("div", { staticClass: "top-widgets" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-xl-3 col-md-6 mb-4" }, [
+            _c(
+              "div",
+              { staticClass: "card border-left-primary shadow h-100 py-2" },
+              [
+                _c("div", { staticClass: "card-body" }, [
+                  _c(
+                    "div",
+                    { staticClass: "row no-gutters align-items-center" },
+                    [
+                      _c("div", { staticClass: "col mr-2" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "h6 font-weight-bold text-primary text-uppercase mb-1"
+                          },
+                          [_vm._v("Total Sessions")]
+                        ),
+                        _vm._v(" "),
+                        _vm.dashboarddata.totalSessionCount > 0
+                          ? _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "h6 mb-0 font-weight-bold text-gray-800"
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(_vm.dashboarddata.totalSessionCount)
                                 )
-                              )
-                            ]
-                          )
-                        : _c(
-                            "div",
-                            {
-                              staticClass:
-                                "h5 mb-0 font-weight-bold text-gray-800"
-                            },
-                            [
-                              _c("a", { attrs: { href: "/sessions/create" } }, [
-                                _vm._v("Add a session")
-                              ])
-                            ]
-                          )
-                    ]),
-                    _vm._v(" "),
-                    _vm._m(2)
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _vm.dashboarddata.lastSession
-                ? _c("div", { staticClass: "card-footer" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-success",
-                        attrs: {
-                          href:
-                            "/sessions/" + _vm.dashboarddata.lastSession.slug
-                        }
-                      },
-                      [_vm._v("View session")]
-                    )
-                  ])
-                : _vm._e()
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-xl-3 col-md-6 mb-4" }, [
-          _c(
-            "div",
-            { staticClass: "card border-left-info shadow h-100 py-2" },
-            [
-              _c("div", { staticClass: "card-body" }, [
-                _c(
-                  "div",
-                  { staticClass: "row no-gutters align-items-center" },
-                  [
-                    _c("div", { staticClass: "col mr-2" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "text-sm font-weight-bold text-info text-uppercase mb-1"
-                        },
-                        [_vm._v("Last Session Date")]
-                      ),
-                      _vm._v(" "),
-                      _vm.dashboarddata.lastSession
-                        ? _c(
-                            "div",
-                            {
-                              staticClass:
-                                "h5 mb-0 font-weight-bold text-gray-800"
-                            },
-                            [
-                              _vm._v(
-                                _vm._s(
-                                  _vm
-                                    .moment(
-                                      _vm.dashboarddata.lastSession.created_at
-                                    )
-                                    .format("MMM Do YYYY hh:mm a")
+                              ]
+                            )
+                          : _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "h6 mb-0 font-weight-bold text-gray-800"
+                              },
+                              [
+                                _c(
+                                  "a",
+                                  { attrs: { href: "/sessions/create" } },
+                                  [_vm._v("Add a session")]
                                 )
-                              )
-                            ]
-                          )
-                        : _c(
-                            "div",
-                            {
-                              staticClass:
-                                "h5 mb-0 font-weight-bold text-gray-800"
-                            },
-                            [
-                              _c("a", { attrs: { href: "/sessions/create" } }, [
-                                _vm._v("Add a session")
-                              ])
-                            ]
-                          )
-                    ]),
-                    _vm._v(" "),
-                    _vm._m(3)
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _vm.dashboarddata.lastSession
-                ? _c("div", { staticClass: "card-footer" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-success",
-                        attrs: {
-                          href:
-                            "/sessions/" + _vm.dashboarddata.lastSession.slug
-                        }
-                      },
-                      [_vm._v("View session")]
-                    )
-                  ])
-                : _vm._e()
-            ]
-          )
+                              ]
+                            )
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(0)
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm.dashboarddata.lastSession
+                  ? _c("div", { staticClass: "card-footer" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-success",
+                          attrs: { href: "/mysessions" }
+                        },
+                        [_vm._v("View all sessions")]
+                      )
+                    ])
+                  : _vm._e()
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-xl-3 col-md-6 mb-4" }, [
+            _c(
+              "div",
+              { staticClass: "card border-left-success shadow h-100 py-2" },
+              [
+                _c("div", { staticClass: "card-body" }, [
+                  _c(
+                    "div",
+                    { staticClass: "row no-gutters align-items-center" },
+                    [
+                      _c("div", { staticClass: "col mr-2" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "h6 font-weight-bold text-success text-uppercase mb-1"
+                          },
+                          [_vm._v("Last Session")]
+                        ),
+                        _vm._v(" "),
+                        _vm.dashboarddata.lastSession
+                          ? _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "h6 mb-0 font-weight-bold text-gray-800"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(_vm.dashboarddata.lastSession.name) +
+                                    "\n                            "
+                                )
+                              ]
+                            )
+                          : _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "h5 mb-0 font-weight-bold text-gray-800"
+                              },
+                              [
+                                _c(
+                                  "a",
+                                  { attrs: { href: "/sessions/create" } },
+                                  [_vm._v("Add a session")]
+                                )
+                              ]
+                            )
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(1)
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm.dashboarddata.lastSession
+                  ? _c("div", { staticClass: "card-footer" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-success",
+                          attrs: {
+                            href:
+                              "/sessions/" + _vm.dashboarddata.lastSession.slug
+                          }
+                        },
+                        [_vm._v("View last session")]
+                      )
+                    ])
+                  : _vm._e()
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-xl-3 col-md-6 mb-4" }, [
+            _c(
+              "div",
+              { staticClass: "card border-left-warning shadow h-100 py-2" },
+              [
+                _c("div", { staticClass: "card-body" }, [
+                  _c(
+                    "div",
+                    { staticClass: "row no-gutters align-items-center" },
+                    [
+                      _c("div", { staticClass: "col mr-2" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "h6 font-weight-bold text-warning text-uppercase mb-1"
+                          },
+                          [_vm._v("Last Body Weight")]
+                        ),
+                        _vm._v(" "),
+                        _vm.dashboarddata.lastSession
+                          ? _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "h6 mb-0 font-weight-bold text-gray-800"
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.dashboarddata.lastSession.body_weight
+                                  ) + " kg"
+                                )
+                              ]
+                            )
+                          : _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "h6 mb-0 font-weight-bold text-gray-800"
+                              },
+                              [
+                                _c(
+                                  "a",
+                                  { attrs: { href: "/sessions/create" } },
+                                  [_vm._v("Add a session")]
+                                )
+                              ]
+                            )
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(2)
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm.dashboarddata.lastSession
+                  ? _c("div", { staticClass: "card-footer" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-success",
+                          attrs: {
+                            href:
+                              "/sessions/" + _vm.dashboarddata.lastSession.slug
+                          }
+                        },
+                        [_vm._v("View last session")]
+                      )
+                    ])
+                  : _vm._e()
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-xl-3 col-md-6 mb-4" }, [
+            _c(
+              "div",
+              { staticClass: "card border-left-info shadow h-100 py-2" },
+              [
+                _c("div", { staticClass: "card-body" }, [
+                  _c(
+                    "div",
+                    { staticClass: "row no-gutters align-items-center" },
+                    [
+                      _c("div", { staticClass: "col mr-2" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "h6 font-weight-bold text-info text-uppercase mb-1"
+                          },
+                          [_vm._v("Last Session Date")]
+                        ),
+                        _vm._v(" "),
+                        _vm.dashboarddata.lastSession
+                          ? _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "h6 mb-0 font-weight-bold text-gray-800"
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm
+                                      .moment(
+                                        _vm.dashboarddata.lastSession.created_at
+                                      )
+                                      .format("MMM Do YYYY hh:mm a")
+                                  )
+                                )
+                              ]
+                            )
+                          : _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "h6 mb-0 font-weight-bold text-gray-800"
+                              },
+                              [
+                                _c(
+                                  "a",
+                                  { attrs: { href: "/sessions/create" } },
+                                  [_vm._v("Add a session")]
+                                )
+                              ]
+                            )
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(3)
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm.dashboarddata.lastSession
+                  ? _c("div", { staticClass: "card-footer" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-success",
+                          attrs: {
+                            href:
+                              "/sessions/" + _vm.dashboarddata.lastSession.slug
+                          }
+                        },
+                        [_vm._v("View last session")]
+                      )
+                    ])
+                  : _vm._e()
+              ]
+            )
+          ])
         ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "card shadow mb-4" }, [
-      _vm._m(4),
+      ]),
       _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [_c("line-chart")], 1)
-    ])
-  ])
+      _c("chart-component", { attrs: { dashboarddata: _vm.dashboarddata } })
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -98426,7 +98494,41 @@ var staticRenderFns = [
     return _c("div", { staticClass: "col-auto" }, [
       _c("i", { staticClass: "fas fa-calendar-day fa-2x text-gray-300" })
     ])
-  },
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modules/Charts.vue?vue&type=template&id=b98606f0&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/modules/Charts.vue?vue&type=template&id=b98606f0& ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "card shadow mb-4" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "card-body" },
+      [_c("line-chart", { attrs: { data: _vm.chartData } })],
+      1
+    )
+  ])
+}
+var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -98439,7 +98541,7 @@ var staticRenderFns = [
       },
       [
         _c("h6", { staticClass: "m-0 font-weight-bold text-primary" }, [
-          _vm._v("Earnings Overview")
+          _vm._v("Body Weight Chart")
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "dropdown no-arrow" }, [
@@ -99527,7 +99629,7 @@ var render = function() {
               {
                 staticClass: "table display table-hover text-center",
                 staticStyle: { width: "100%" },
-                attrs: { id: "countryTable" }
+                attrs: { id: "exerciseTable" }
               },
               [
                 _vm._m(1),
@@ -99707,7 +99809,7 @@ var render = function() {
                 _vm._v(
                   " Body Weight " +
                     _vm._s(_vm.session.body_weight) +
-                    "\n                        "
+                    " kg\n                        "
                 )
               ])
             ])
@@ -112096,7 +112198,8 @@ Vue.component('my-sessions-component', __webpack_require__(/*! ./components/sess
 Vue.component('view-my-session-component', __webpack_require__(/*! ./components/session/ViewMySession.vue */ "./resources/js/components/session/ViewMySession.vue")["default"]); //modules
 
 Vue.component('status-component', __webpack_require__(/*! ./components/modules/Status.vue */ "./resources/js/components/modules/Status.vue")["default"]);
-Vue.component('edit-exercise-modal-component', __webpack_require__(/*! ./components/modules/EditExerciseModal.vue */ "./resources/js/components/modules/EditExerciseModal.vue")["default"]); //plugins
+Vue.component('edit-exercise-modal-component', __webpack_require__(/*! ./components/modules/EditExerciseModal.vue */ "./resources/js/components/modules/EditExerciseModal.vue")["default"]);
+Vue.component('chart-component', __webpack_require__(/*! ./components/modules/Charts.vue */ "./resources/js/components/modules/Charts.vue")["default"]); //plugins
 
 Vue.component('number-input', _chenfengyuan_vue_number_input__WEBPACK_IMPORTED_MODULE_0___default.a);
 Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_1___default.a);
@@ -112232,6 +112335,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_template_id_c3d42bc4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_template_id_c3d42bc4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/modules/Charts.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/components/modules/Charts.vue ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Charts_vue_vue_type_template_id_b98606f0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Charts.vue?vue&type=template&id=b98606f0& */ "./resources/js/components/modules/Charts.vue?vue&type=template&id=b98606f0&");
+/* harmony import */ var _Charts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Charts.vue?vue&type=script&lang=js& */ "./resources/js/components/modules/Charts.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Charts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Charts_vue_vue_type_template_id_b98606f0___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Charts_vue_vue_type_template_id_b98606f0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/modules/Charts.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/modules/Charts.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/modules/Charts.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Charts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Charts.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modules/Charts.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Charts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/modules/Charts.vue?vue&type=template&id=b98606f0&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/modules/Charts.vue?vue&type=template&id=b98606f0& ***!
+  \***********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Charts_vue_vue_type_template_id_b98606f0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Charts.vue?vue&type=template&id=b98606f0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modules/Charts.vue?vue&type=template&id=b98606f0&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Charts_vue_vue_type_template_id_b98606f0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Charts_vue_vue_type_template_id_b98606f0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
