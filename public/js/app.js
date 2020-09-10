@@ -98267,7 +98267,7 @@ var render = function() {
                               "div",
                               {
                                 staticClass:
-                                  "h5 mb-0 font-weight-bold text-gray-800"
+                                  "h6 mb-0 font-weight-bold text-gray-800"
                               },
                               [
                                 _c(

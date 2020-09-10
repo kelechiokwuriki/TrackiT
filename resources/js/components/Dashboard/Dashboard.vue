@@ -34,7 +34,7 @@
                                 <div class="h6 mb-0 font-weight-bold text-gray-800" v-if="dashboarddata.lastSession">
                                     {{ dashboarddata.lastSession.name }}
                                 </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" v-else><a href="/sessions/create">Add a session</a></div>
+                            <div class="h6 mb-0 font-weight-bold text-gray-800" v-else><a href="/sessions/create">Add a session</a></div>
                             </div>
                             <div class="col-auto">
                             <i class="fas fa-dumbbell fa-2x text-gray-300"></i>
