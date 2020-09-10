@@ -7,10 +7,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Session</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        .session-date{
+            float: right;
+        }
+
+    </style>
   </head>
   <body>
+      <h1 class="mb-4">TrackIt</h1>
+
+      <h6 class="session-date">{{ \Carbon\Carbon::parse($session->created_at)->isoFormat('MMMM Do YYYY') }}</h6>
       <h5>Session: {{ $session->name}}</h5>
-      <h6>{{ \Carbon\Carbon::parse($session->created_at)->isoFormat('MMMM Do YYYY') }}</h6>
+
       <table class="table table-bordered text-center">
         <thead>
             <tr class="table-danger">
