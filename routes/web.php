@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\MySessionController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,5 +26,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/mysessions', 'SessionsController@mysessions');
     Route::resource('sessions', 'SessionsController');
+    Route::get('/file/{sessionslug}', 'FileController@generatePdfFile');
 });
 

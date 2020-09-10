@@ -9,9 +9,9 @@
                         <h4 class="m-0 font-weight-bold text-success">{{ session.name }} Session</h4>
                     </div>
                     <div>
+                        <a :href="'/file/' + session.slug" target="__blank" class="btn btn-info"><i class="mr-2 fas fa-file-pdf"></i>Generate PDF</a>
                         <a :href="'/sessions/' + session.slug + '/edit'" class="btn btn-secondary">Edit session</a>
                         <button class="btn btn-danger" @click="showDeleteConfirmation">Delete session</button>
-
                     </div>
                 </div>
 

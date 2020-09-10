@@ -2658,12 +2658,14 @@ __webpack_require__.r(__webpack_exports__);
       return moment(date);
     }),
     transformDataForChart: function transformDataForChart() {
-      var sessions = this.dashboarddata.allSessions;
+      var tempArr = this.dashboarddata.allSessions;
+      var data = {};
+      tempArr.forEach(function (sessions) {
+        var date = moment(sessions.created_at).format('YYYY-MM-DD'); //format of {25-5-12: 75}
 
-      for (var i = 0; i < sessions.length; i++) {
-        var date = this.moment(sessions[i].created_at).format('YYYY-MM-DD');
-        this.chartData[date] = sessions[i].body_weight;
-      }
+        data[date] = parseInt(sessions.body_weight);
+      });
+      this.chartData = data;
     }
   },
   props: {
@@ -99782,6 +99784,18 @@ var render = function() {
             _c(
               "a",
               {
+                staticClass: "btn btn-info",
+                attrs: { href: "/file/" + _vm.session.slug, target: "__blank" }
+              },
+              [
+                _c("i", { staticClass: "mr-2 fas fa-file-pdf" }),
+                _vm._v("Generate PDF")
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
                 staticClass: "btn btn-secondary",
                 attrs: { href: "/sessions/" + _vm.session.slug + "/edit" }
               },
@@ -112180,9 +112194,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-select/dist/vue-select.css */ "./node_modules/vue-select/dist/vue-select.css");
 /* harmony import */ var vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var vue_chartkick__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-chartkick */ "./node_modules/vue-chartkick/dist/vue-chartkick.esm.js");
-/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/Chart.js");
-/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var vue_chartkick__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-chartkick */ "./node_modules/vue-chartkick/dist/vue-chartkick.esm.js");
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/Chart.js");
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_5__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
@@ -112191,27 +112207,28 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 
-Vue.component('add-session-component', __webpack_require__(/*! ./components/session/AddSession.vue */ "./resources/js/components/session/AddSession.vue")["default"]);
-Vue.component('edit-session-component', __webpack_require__(/*! ./components/session/EditSession.vue */ "./resources/js/components/session/EditSession.vue")["default"]);
-Vue.component('dashboard-component', __webpack_require__(/*! ./components/Dashboard/Dashboard.vue */ "./resources/js/components/Dashboard/Dashboard.vue")["default"]);
-Vue.component('my-sessions-component', __webpack_require__(/*! ./components/session/MySessions.vue */ "./resources/js/components/session/MySessions.vue")["default"]);
-Vue.component('view-my-session-component', __webpack_require__(/*! ./components/session/ViewMySession.vue */ "./resources/js/components/session/ViewMySession.vue")["default"]); //modules
 
-Vue.component('status-component', __webpack_require__(/*! ./components/modules/Status.vue */ "./resources/js/components/modules/Status.vue")["default"]);
-Vue.component('edit-exercise-modal-component', __webpack_require__(/*! ./components/modules/EditExerciseModal.vue */ "./resources/js/components/modules/EditExerciseModal.vue")["default"]);
-Vue.component('chart-component', __webpack_require__(/*! ./components/modules/Charts.vue */ "./resources/js/components/modules/Charts.vue")["default"]); //plugins
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('add-session-component', __webpack_require__(/*! ./components/session/AddSession.vue */ "./resources/js/components/session/AddSession.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('edit-session-component', __webpack_require__(/*! ./components/session/EditSession.vue */ "./resources/js/components/session/EditSession.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('dashboard-component', __webpack_require__(/*! ./components/Dashboard/Dashboard.vue */ "./resources/js/components/Dashboard/Dashboard.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('my-sessions-component', __webpack_require__(/*! ./components/session/MySessions.vue */ "./resources/js/components/session/MySessions.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('view-my-session-component', __webpack_require__(/*! ./components/session/ViewMySession.vue */ "./resources/js/components/session/ViewMySession.vue")["default"]); //modules
 
-Vue.component('number-input', _chenfengyuan_vue_number_input__WEBPACK_IMPORTED_MODULE_0___default.a);
-Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_1___default.a);
-Vue.use(vue_chartkick__WEBPACK_IMPORTED_MODULE_3__["default"].use(chart_js__WEBPACK_IMPORTED_MODULE_4___default.a));
-window.eventBus = new Vue({});
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('status-component', __webpack_require__(/*! ./components/modules/Status.vue */ "./resources/js/components/modules/Status.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('edit-exercise-modal-component', __webpack_require__(/*! ./components/modules/EditExerciseModal.vue */ "./resources/js/components/modules/EditExerciseModal.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('chart-component', __webpack_require__(/*! ./components/modules/Charts.vue */ "./resources/js/components/modules/Charts.vue")["default"]); //plugins
+
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('number-input', _chenfengyuan_vue_number_input__WEBPACK_IMPORTED_MODULE_0___default.a);
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_1___default.a);
+vue__WEBPACK_IMPORTED_MODULE_3___default.a.use(vue_chartkick__WEBPACK_IMPORTED_MODULE_4__["default"].use(chart_js__WEBPACK_IMPORTED_MODULE_5___default.a));
+window.eventBus = new vue__WEBPACK_IMPORTED_MODULE_3___default.a({});
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-var app = new Vue({
+var app = new vue__WEBPACK_IMPORTED_MODULE_3___default.a({
   el: '#app'
 });
 

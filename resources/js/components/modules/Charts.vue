@@ -42,12 +42,17 @@ export default {
             return moment(date);
         },
         transformDataForChart() {
-            let sessions = this.dashboarddata.allSessions;
+            let tempArr = this.dashboarddata.allSessions;
+            let data = {};
 
-            for(let i = 0; i < sessions.length; i++) {
-                let date = this.moment(sessions[i].created_at).format('YYYY-MM-DD');
-                this.chartData[date] = sessions[i].body_weight;
-            }
+            tempArr.forEach(function (sessions) {
+                let date = moment(sessions.created_at).format('YYYY-MM-DD');
+
+                //format of {25-5-12: 75}
+                data[date] = parseInt(sessions.body_weight);
+            })
+
+            this.chartData = data;
         }
     },
     props: {
