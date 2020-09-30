@@ -134,12 +134,18 @@ export default {
         updateSession() {
              axios.put('/api/sessions/' + this.session.id, this.session).then(response => {
                 if(response.data === 1) {
-                    let statusMessage = {
-                        statusColor: 'alert-success',
-                        status: 'success',
-                        message: 'Session updated successfully!'
-                    };
-                    window.eventBus.$emit('status', statusMessage);
+                    // let statusMessage = {
+                    //     statusColor: 'alert-success',
+                    //     status: 'success',
+                    //     message: 'Session updated successfully!'
+                    // };
+                    // window.eventBus.$emit('status', statusMessage);
+
+                    return Swal.fire({
+                        title: 'Success',
+                        text: 'Session updated successfully',
+                        icon: 'success'
+                    });
                 }
             });
         },

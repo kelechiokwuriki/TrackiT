@@ -177,13 +177,19 @@ export default {
             axios.post('/api/sessions', this.session).then(response => {
                 if(response.status === 201) {
 
-                    let statusMessage = {
-                        statusColor: 'alert-success',
-                        status: 'success',
-                        message: 'Session created successfully!'
-                    };
+                    // let statusMessage = {
+                    //     statusColor: 'alert-success',
+                    //     status: 'success',
+                    //     message: 'Session created successfully!'
+                    // };
 
-                    window.eventBus.$emit('status', statusMessage);
+                    return Swal.fire({
+                        title: 'Success',
+                        text: 'Session created successfully',
+                        icon: 'success'
+                    });
+
+                    // window.eventBus.$emit('status', statusMessage);
                 }
             })
 
