@@ -1,0 +1,12 @@
+
+
+  @media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .main {
+      margin-bottom: 20%;
+    }
+    #data-table_wrapper, .mysessiontable{
+      font-size: 10px;
+    }
+
+  }

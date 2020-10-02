@@ -31,7 +31,7 @@
                                 <td>{{session.body_weight}}</td>
                                 <td>{{session.total_weight_lifted_at_session}} kg</td>
                                 <td>{{session.exercises_count}}</td>
-                                <td>{{ moment(session.created_at).format("MMM Do YYYY hh:mm a") }}</td>
+                                <td class="d-none d-sm-none d-md-block d-sm-block">{{ moment(session.created_at).format("MMM Do YYYY hh:mm a") }}</td>
                             </tr>
                         </tbody>
                     </table>

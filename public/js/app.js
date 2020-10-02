@@ -103021,15 +103021,22 @@ var render = function() {
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(session.exercises_count))]),
                         _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            _vm._s(
-                              _vm
-                                .moment(session.created_at)
-                                .format("MMM Do YYYY hh:mm a")
+                        _c(
+                          "td",
+                          {
+                            staticClass:
+                              "d-none d-sm-none d-md-block d-sm-block"
+                          },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                _vm
+                                  .moment(session.created_at)
+                                  .format("MMM Do YYYY hh:mm a")
+                              )
                             )
-                          )
-                        ])
+                          ]
+                        )
                       ]
                     )
                   }),
@@ -103194,29 +103201,41 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("table", { staticClass: "table table-hover text-center" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            _vm._l(_vm.session.exercises, function(exercise, index) {
-              return _c("tr", { key: index }, [
-                _c("td", [_vm._v(_vm._s(index + 1))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(exercise.name))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(exercise.type))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(exercise.weight_number) + " kg")]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(exercise.sets))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(exercise.reps))])
-              ])
-            }),
-            0
-          )
-        ])
+        _c(
+          "table",
+          { staticClass: "table table-hover text-center mysessiontable" },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.session.exercises, function(exercise, index) {
+                return _c("tr", { key: index }, [
+                  _c("td", [_vm._v(_vm._s(index + 1))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(exercise.name))]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "d-none d-sm-none d-md-block d-sm-block" },
+                    [_vm._v(_vm._s(exercise.type))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "d-none d-sm-none d-md-block d-sm-block" },
+                    [_vm._v(_vm._s(exercise.weight_number) + " kg")]
+                  ),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(exercise.sets))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(exercise.reps))])
+                ])
+              }),
+              0
+            )
+          ]
+        )
       ])
     ]),
     _vm._v(" "),
@@ -103281,9 +103300,23 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Type")]),
+        _c(
+          "th",
+          {
+            staticClass: "d-none d-sm-none d-md-block d-sm-block",
+            attrs: { scope: "col" }
+          },
+          [_vm._v("Type")]
+        ),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Weight")]),
+        _c(
+          "th",
+          {
+            staticClass: "d-none d-sm-none d-md-block d-sm-block",
+            attrs: { scope: "col" }
+          },
+          [_vm._v("Weight")]
+        ),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Sets")]),
         _vm._v(" "),
