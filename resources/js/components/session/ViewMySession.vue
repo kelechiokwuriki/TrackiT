@@ -44,7 +44,7 @@
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
                         <th scope="col" class="d-none d-sm-none d-md-block d-sm-block">Type</th>
-                        <th scope="col" class="d-none d-sm-none d-md-block d-sm-block">Weight</th>
+                        <th scope="col">Weight</th>
                         <th scope="col">Sets</th>
                         <th scope="col">Reps</th>
                         </tr>
@@ -54,7 +54,7 @@
                             <td>{{index + 1}}</td>
                             <td>{{exercise.name}}</td>
                             <td class="d-none d-sm-none d-md-block d-sm-block">{{exercise.type}}</td>
-                            <td class="d-none d-sm-none d-md-block d-sm-block">{{exercise.weight_number}} kg</td>
+                            <td>{{exercise.weight_number}} kg</td>
                             <td>{{exercise.sets}}</td>
                             <td>{{exercise.reps}}</td>
                         </tr>

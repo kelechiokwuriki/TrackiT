@@ -16,7 +16,7 @@ Vue.component('edit-session-component', require('./components/session/EditSessio
 Vue.component('dashboard-component', require('./components/Dashboard/Dashboard.vue').default);
 Vue.component('my-sessions-component', require('./components/session/MySessions.vue').default);
 Vue.component('view-my-session-component', require('./components/session/ViewMySession.vue').default);
-
+Vue.component('onerepmax-component', require('./components/onerepmax/onerepmax.vue').default);
 
 //modules
 Vue.component('status-component', require('./components/modules/Status.vue').default);

@@ -78,6 +78,13 @@
                                 </a>
                             </li>
 
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->is('mysessions') ? 'active text-success font-weight-bold' : '' }}" href="/onerepmaxcalculator">
+                                    <i class="fas fa-dumbbell mr-1"></i>
+                                    One Rep Max calculator
+                                </a>
+                            </li>
+
                         </ul>
                     </div>
 
@@ -126,6 +133,12 @@
             @yield('content')
         </main>
     </div>
+
+    <footer class="footer">
+        <div class="container">
+          <span class="text-muted">Powered by <a href="http://www.makowtech.com" target="__blank">Makow Tech</a></span>
+        </div>
+      </footer>
 
     <script>
         window.Laravel = {!!json_encode([

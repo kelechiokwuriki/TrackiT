@@ -25,6 +25,7 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/mysessions', 'SessionsController@mysessions');
+    Route::get('/onerepmaxcalculator', 'OneRepMaxController@calculateOneRepMax');
     Route::resource('sessions', 'SessionsController');
     Route::get('/file/{sessionslug}', 'FileController@generatePdfFile');
 });
