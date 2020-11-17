@@ -1,27 +1,30 @@
 <template>
     <div class="container">
         <div class="top-widgets">
+            <div class="mb-4">
+                <a href="/sessions/create" target="__blank" class="btn btn-success">Add Session</a>
+            </div>
             <div class="row">
                 <!-- Total essions -->
                 <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                            <div class="h6 font-weight-bold text-primary text-uppercase mb-1">Total Sessions</div>
-                            <div class="h6 mb-0 font-weight-bold text-gray-800" v-if="dashboarddata.totalSessionCount > 0">{{ dashboarddata.totalSessionCount }}</div>
-                            <div class="h6 mb-0 font-weight-bold text-gray-800" v-else><a href="/sessions/create">Add a session</a></div>
+                    <div class="card border-left-primary shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                <div class="h6 font-weight-bold text-primary text-uppercase mb-1">Total Sessions</div>
+                                <div class="h6 mb-0 font-weight-bold text-gray-800" v-if="dashboarddata.totalSessionCount > 0">{{ dashboarddata.totalSessionCount }}</div>
+                                <div class="h6 mb-0 font-weight-bold text-gray-800" v-else><a href="/sessions/create">Add a session</a></div>
 
-                            </div>
-                            <div class="col-auto">
-                            <i class="fas fa-book fa-2x text-gray-300"></i>
+                                </div>
+                                <div class="col-auto">
+                                <i class="fas fa-book fa-2x text-gray-300"></i>
+                                </div>
                             </div>
                         </div>
+                        <div class="card-footer" v-if="dashboarddata.lastSession">
+                            <a href="/mysessions" class="btn btn-success">View all sessions</a>
+                        </div>
                     </div>
-                    <div class="card-footer" v-if="dashboarddata.lastSession">
-                        <a href="/mysessions" class="btn btn-success">View all sessions</a>
-                    </div>
-                </div>
                 </div>
 
                 <!-- Last session -->

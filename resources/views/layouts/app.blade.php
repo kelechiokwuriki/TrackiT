@@ -79,7 +79,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link {{ request()->is('mysessions') ? 'active text-success font-weight-bold' : '' }}" href="/onerepmaxcalculator">
+                                <a class="nav-link {{ request()->is('onerepmaxcalculator') ? 'active text-success font-weight-bold' : '' }}" href="/onerepmaxcalculator">
                                     <i class="fas fa-dumbbell mr-1"></i>
                                     One Rep Max calculator
                                 </a>

@@ -14,7 +14,7 @@
 
             <!-- Card Body -->
             <div class="card-body">
-                <div id="data-table_wrapper" class="dataTables_wrapper no-footer">
+                <div id="data-table_wrapper" class="dataTables_wrapper no-footer" v-if="sessions.length > 0">
                     <table id="exerciseTable" class="table display table-hover text-center" style="width:100%">
                         <thead class="thead-light">
                             <tr>
@@ -36,6 +36,7 @@
                         </tbody>
                     </table>
                 </div>
+                <p v-else class="text-center">Loading...</p>
             </div>
         </div>
     </div>

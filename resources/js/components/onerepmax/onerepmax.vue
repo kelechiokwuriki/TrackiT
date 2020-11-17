@@ -9,22 +9,22 @@
                         Your one-rep max is the max weight you can lift for a single repetition for a given exercise.
                         <form class="mt-4">
                             <div class="form-group">
-                                <label for="lift-type">Lift</label>
+                                <label for="lift-type">Weight Lifted</label>
                                 <div class="row">
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-9">
                                         <input type="text" v-model="lift" class="form-control" id="lift-type">
                                     </div>
-                                    <div class="col-sm-2">
-                                        <v-select :options="liftType"></v-select>
+                                    <div class="col-sm-3">
+                                        <v-select v-model="liftTypeSelected" :options="liftType"></v-select>
                                     </div>
                                 </div>
 
                             </div>
 
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="repititions">Repitions</label>
                                 <number-input v-model="repititions" id="repititions" :min="1" controls></number-input>
-                            </div>
+                            </div> -->
                             <div class="text-center">
                                 <button type="submit" class="btn btn-success" @click="calculateOneRepMax" :disabled="lift === 0">Calculate</button>
                             </div>
@@ -43,7 +43,7 @@
                     <tbody>
                         <tr v-for="(data, index) in percentageAndRepitions">
                             <th scope="row">{{ data.percentage }} %</th>
-                            <td>{{ data.lift }} kg</td>
+                            <td>{{ data.lift }} {{liftTypeSelected}}</td>
                             <td>{{ data.oneRepMax }}</td>
                         </tr>
                     </tbody>
@@ -59,8 +59,9 @@
         data() {
             return {
                 liftType: [
-                    'KG', 'LB'
+                    'kg', 'lb'
                 ],
+                liftTypeSelected: '',
                 lift: 0,
                 clicked: false,
                 percentageOfOneRepMax: 105,

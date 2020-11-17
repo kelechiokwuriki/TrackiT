@@ -2560,6 +2560,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2898,7 +2901,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      liftType: ['KG', 'LB'],
+      liftType: ['kg', 'lb'],
+      liftTypeSelected: '',
       lift: 0,
       clicked: false,
       percentageOfOneRepMax: 105,
@@ -3419,6 +3423,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -101637,6 +101642,8 @@ var render = function() {
     { staticClass: "container" },
     [
       _c("div", { staticClass: "top-widgets" }, [
+        _vm._m(0),
+        _vm._v(" "),
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-xl-3 col-md-6 mb-4" }, [
             _c(
@@ -101687,7 +101694,7 @@ var render = function() {
                             )
                       ]),
                       _vm._v(" "),
-                      _vm._m(0)
+                      _vm._m(1)
                     ]
                   )
                 ]),
@@ -101759,7 +101766,7 @@ var render = function() {
                             )
                       ]),
                       _vm._v(" "),
-                      _vm._m(1)
+                      _vm._m(2)
                     ]
                   )
                 ]),
@@ -101834,7 +101841,7 @@ var render = function() {
                             )
                       ]),
                       _vm._v(" "),
-                      _vm._m(2)
+                      _vm._m(3)
                     ]
                   )
                 ]),
@@ -101913,7 +101920,7 @@ var render = function() {
                             )
                       ]),
                       _vm._v(" "),
-                      _vm._m(3)
+                      _vm._m(4)
                     ]
                   )
                 ]),
@@ -101945,6 +101952,21 @@ var render = function() {
   )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb-4" }, [
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-success",
+          attrs: { href: "/sessions/create", target: "__blank" }
+        },
+        [_vm._v("Add Session")]
+      )
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -102407,10 +102429,12 @@ var render = function() {
             ),
             _c("form", { staticClass: "mt-4" }, [
               _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "lift-type" } }, [_vm._v("Lift")]),
+                _c("label", { attrs: { for: "lift-type" } }, [
+                  _vm._v("Weight Lifted")
+                ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-sm-10" }, [
+                  _c("div", { staticClass: "col-sm-9" }, [
                     _c("input", {
                       directives: [
                         {
@@ -102436,34 +102460,23 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "div",
-                    { staticClass: "col-sm-2" },
-                    [_c("v-select", { attrs: { options: _vm.liftType } })],
+                    { staticClass: "col-sm-3" },
+                    [
+                      _c("v-select", {
+                        attrs: { options: _vm.liftType },
+                        model: {
+                          value: _vm.liftTypeSelected,
+                          callback: function($$v) {
+                            _vm.liftTypeSelected = $$v
+                          },
+                          expression: "liftTypeSelected"
+                        }
+                      })
+                    ],
                     1
                   )
                 ])
               ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "form-group" },
-                [
-                  _c("label", { attrs: { for: "repititions" } }, [
-                    _vm._v("Repitions")
-                  ]),
-                  _vm._v(" "),
-                  _c("number-input", {
-                    attrs: { id: "repititions", min: 1, controls: "" },
-                    model: {
-                      value: _vm.repititions,
-                      callback: function($$v) {
-                        _vm.repititions = $$v
-                      },
-                      expression: "repititions"
-                    }
-                  })
-                ],
-                1
-              ),
               _vm._v(" "),
               _c("div", { staticClass: "text-center" }, [
                 _c(
@@ -102504,7 +102517,11 @@ var render = function() {
                     _vm._v(_vm._s(data.percentage) + " %")
                   ]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(data.lift) + " kg")]),
+                  _c("td", [
+                    _vm._v(
+                      _vm._s(data.lift) + " " + _vm._s(_vm.liftTypeSelected)
+                    )
+                  ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(data.oneRepMax))])
                 ])
@@ -103260,82 +103277,86 @@ var render = function() {
       _vm._m(0),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
-        _c(
-          "div",
-          {
-            staticClass: "dataTables_wrapper no-footer",
-            attrs: { id: "data-table_wrapper" }
-          },
-          [
-            _c(
-              "table",
+        _vm.sessions.length > 0
+          ? _c(
+              "div",
               {
-                staticClass: "table display table-hover text-center",
-                staticStyle: { width: "100%" },
-                attrs: { id: "exerciseTable" }
+                staticClass: "dataTables_wrapper no-footer",
+                attrs: { id: "data-table_wrapper" }
               },
               [
-                _vm._m(1),
-                _vm._v(" "),
                 _c(
-                  "tbody",
-                  { staticClass: "sessions-table-data" },
-                  _vm._l(_vm.sessions, function(session, index) {
-                    return _c(
-                      "tr",
-                      {
-                        key: index,
-                        on: {
-                          click: function($event) {
-                            return _vm.navigateTo(session.slug)
-                          }
-                        }
-                      },
-                      [
-                        _c("td", [
-                          _c(
-                            "a",
-                            { attrs: { href: "/sessions/" + session.slug } },
-                            [_vm._v(_vm._s(session.name))]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(session.body_weight))]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            _vm._s(session.total_weight_lifted_at_session) +
-                              " kg"
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(session.exercises_count))]),
-                        _vm._v(" "),
-                        _c(
-                          "td",
+                  "table",
+                  {
+                    staticClass: "table display table-hover text-center",
+                    staticStyle: { width: "100%" },
+                    attrs: { id: "exerciseTable" }
+                  },
+                  [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      { staticClass: "sessions-table-data" },
+                      _vm._l(_vm.sessions, function(session, index) {
+                        return _c(
+                          "tr",
                           {
-                            staticClass:
-                              "d-none d-sm-none d-md-block d-sm-block"
+                            key: index,
+                            on: {
+                              click: function($event) {
+                                return _vm.navigateTo(session.slug)
+                              }
+                            }
                           },
                           [
-                            _vm._v(
-                              _vm._s(
-                                _vm
-                                  .moment(session.created_at)
-                                  .format("MMM Do YYYY hh:mm a")
+                            _c("td", [
+                              _c(
+                                "a",
+                                {
+                                  attrs: { href: "/sessions/" + session.slug }
+                                },
+                                [_vm._v(_vm._s(session.name))]
                               )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(session.body_weight))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                _vm._s(session.total_weight_lifted_at_session) +
+                                  " kg"
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(session.exercises_count))]),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              {
+                                staticClass:
+                                  "d-none d-sm-none d-md-block d-sm-block"
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm
+                                      .moment(session.created_at)
+                                      .format("MMM Do YYYY hh:mm a")
+                                  )
+                                )
+                              ]
                             )
                           ]
                         )
-                      ]
+                      }),
+                      0
                     )
-                  }),
-                  0
+                  ]
                 )
               ]
             )
-          ]
-        )
+          : _c("p", { staticClass: "text-center" }, [_vm._v("Loading...")])
       ])
     ])
   ])
